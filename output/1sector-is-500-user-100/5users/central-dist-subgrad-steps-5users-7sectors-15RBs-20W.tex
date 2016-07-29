@@ -1,0 +1,95 @@
+% This file was created by matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=0.951\figurewidth,
+height=\figureheight,
+at={(0\figurewidth,0\figureheight)},
+scale only axis,
+xmin=0.5,
+xmax=2.5,
+xtick={1,2},
+xticklabels={{Central-EE},{Distributed-EE}},
+ymin=-173032.5,
+ymax=3709912.5,
+ylabel={Sugradient steps},
+axis background/.style={fill=white}
+]
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+1	8610\\
+1	12075\\
+};
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+2	975300\\
+2	1203990\\
+};
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+1	3465\\
+1	5565\\
+};
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+2	401490\\
+2	676275\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+0.925	12075\\
+1.075	12075\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+1.925	1203990\\
+2.075	1203990\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+0.925	3465\\
+1.075	3465\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+1.925	401490\\
+2.075	401490\\
+};
+\addplot [color=blue,solid,forget plot]
+  table[row sep=crcr]{%
+0.85	5565\\
+0.85	8610\\
+1.15	8610\\
+1.15	5565\\
+0.85	5565\\
+};
+\addplot [color=blue,solid,forget plot]
+  table[row sep=crcr]{%
+1.85	676275\\
+1.85	975300\\
+2.15	975300\\
+2.15	676275\\
+1.85	676275\\
+};
+\addplot [color=red,solid,forget plot]
+  table[row sep=crcr]{%
+0.85	7612.5\\
+1.15	7612.5\\
+};
+\addplot [color=red,solid,forget plot]
+  table[row sep=crcr]{%
+1.85	831225\\
+2.15	831225\\
+};
+\addplot [color=black,only marks,mark=+,mark options={solid,draw=red},forget plot]
+  table[row sep=crcr]{%
+1	15225\\
+};
+\addplot [color=black,only marks,mark=+,mark options={solid,draw=red},forget plot]
+  table[row sep=crcr]{%
+2	1531290\\
+2	3533415\\
+};
+\end{axis}
+\end{tikzpicture}%

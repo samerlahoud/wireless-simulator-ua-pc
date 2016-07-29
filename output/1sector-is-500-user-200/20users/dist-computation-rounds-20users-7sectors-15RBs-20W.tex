@@ -1,0 +1,56 @@
+% This file was created by matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=0.951\figurewidth,
+height=\figureheight,
+at={(0\figurewidth,0\figureheight)},
+scale only axis,
+xmin=0.5,
+xmax=1.5,
+xtick={1},
+xticklabels={{Distributed-EE}},
+ymin=1.95,
+ymax=3.05,
+ylabel={Best response rounds},
+axis background/.style={fill=white}
+]
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+1	3\\
+1	3\\
+};
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+1	3\\
+1	3\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+0.9625	3\\
+1.0375	3\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+0.9625	3\\
+1.0375	3\\
+};
+\addplot [color=blue,solid,forget plot]
+  table[row sep=crcr]{%
+0.925	3\\
+1.075	3\\
+0.925	3\\
+};
+\addplot [color=red,solid,forget plot]
+  table[row sep=crcr]{%
+0.925	3\\
+1.075	3\\
+};
+\addplot [color=black,only marks,mark=+,mark options={solid,draw=red},forget plot]
+  table[row sep=crcr]{%
+1	2\\
+1	2\\
+};
+\end{axis}
+\end{tikzpicture}%

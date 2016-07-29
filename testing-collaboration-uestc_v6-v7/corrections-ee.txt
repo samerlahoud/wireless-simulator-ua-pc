@@ -1,0 +1,6 @@
+1- Corriger if (abs(objective) < 0.1) dans central_ee_maxlog_sinr_power_allocation_rb_gp
+et dans central_ee_maxlog_sinr_power_allocation
+2- corriger l'expression de la dérivée
+3- ajouter la contrainte min dans l’optim
+4- gradient projection
+

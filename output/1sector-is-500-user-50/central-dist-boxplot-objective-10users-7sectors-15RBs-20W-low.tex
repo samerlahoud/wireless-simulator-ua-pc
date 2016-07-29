@@ -1,0 +1,99 @@
+% This file was created by matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=0.991\figurewidth,
+height=\figureheight,
+at={(0\figurewidth,0\figureheight)},
+scale only axis,
+separate axis lines,
+every outer x axis line/.append style={black},
+every x tick label/.append style={font=\color{black}},
+xmin=0.5,
+xmax=2.5,
+xtick={1,2},
+xticklabels={{Central-EE},{Distributed-EE}},
+every outer y axis line/.append style={black},
+every y tick label/.append style={font=\color{black}},
+ymin=3.20893659263735,
+ymax=5.9517235594816,
+ylabel={Energy Efficiency},
+axis background/.style={fill=white}
+]
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+1	5.54836100456442\\
+1	5.82705142462504\\
+};
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+2	4.60355968176057\\
+2	4.87916999787622\\
+};
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+1	5.06633580795825\\
+1	5.20482401887261\\
+};
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+2	3.98116182923669\\
+2	4.18866761807617\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+0.925	5.82705142462504\\
+1.075	5.82705142462504\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+1.925	4.87916999787622\\
+2.075	4.87916999787622\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+0.925	5.06633580795825\\
+1.075	5.06633580795825\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+1.925	3.98116182923669\\
+2.075	3.98116182923669\\
+};
+\addplot [color=blue,solid,forget plot]
+  table[row sep=crcr]{%
+0.85	5.20482401887261\\
+0.85	5.54836100456442\\
+1.15	5.54836100456442\\
+1.15	5.20482401887261\\
+0.85	5.20482401887261\\
+};
+\addplot [color=blue,solid,forget plot]
+  table[row sep=crcr]{%
+1.85	4.18866761807617\\
+1.85	4.60355968176057\\
+2.15	4.60355968176057\\
+2.15	4.18866761807617\\
+1.85	4.18866761807617\\
+};
+\addplot [color=red,solid,forget plot]
+  table[row sep=crcr]{%
+0.85	5.45417480000984\\
+1.15	5.45417480000984\\
+};
+\addplot [color=red,solid,forget plot]
+  table[row sep=crcr]{%
+1.85	4.47324424733324\\
+2.15	4.47324424733324\\
+};
+\addplot [color=blue,only marks,mark=+,mark options={solid,draw=red},forget plot]
+  table[row sep=crcr]{%
+1	4.53726408160986\\
+};
+\addplot [color=blue,only marks,mark=+,mark options={solid,draw=red},forget plot]
+  table[row sep=crcr]{%
+2	3.33360872749391\\
+};
+\end{axis}
+\end{tikzpicture}%

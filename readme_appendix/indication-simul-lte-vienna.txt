@@ -1,0 +1,19 @@
+user_macroscopic_pathloss_dB = obj.downlink_channel.macroscopic_pathloss + obj.penetration_loss - obj.antenna_gain;
+user_shadow_fading_loss_dB   = obj.downlink_channel.shadow_fading_pathloss;
+                
+user_macroscopic_pathloss_linear = 10^(0.1*user_macroscopic_pathloss_dB);
+user_shadow_fading_loss_linear   = 10^(0.1*user_shadow_fading_loss_dB);
+
+thermal_noise_watts_per_half_RB = obj.thermal_noise_W_RB/2;
+         
+TX_power_data      = the_RB_grid.power_allocation';
+RX_total_RB        = (TX_power_data+TX_power_signaling)./user_macroscopic_pathloss_linear./user_shadow_fading_loss_linear;
+            
+[zeta,chi,psi] = obj.downlink_channel.fast_fading_model.generate_fast_fading_signal(t,tx_mode);
+RX_power = RX_total.*zeta.';
+
+# only slow fading
+obj.SNR_avg_preequal = 10*log10(mean(RX_total)./thermal_noise_watts_per_half_RB
+
+noise_plus_inter_layer_power = psi.*thermal_noise_watts_per_half_RB;
+SINR_linear = RX_power ./ Interference_plus_noise_power.';
