@@ -27,9 +27,14 @@ for t_ = 1:length(BS_type)
     if ismember(BS_type(t_),'macro')
         netconfig.nb_macro_BSs = BS_type_count(t_);
     elseif ismember(BS_type(t_),'femto')
-        netconfig.nb_femto_BSs = BS_type_count(t_);
+        % Half of femto postions corresponds to femto BSs, 
+        % Other half to mmwave BSs.
+        netconfig.nb_femto_BSs = BS_type_count(t_)/2;
+        netconfig.nb_mmwave_BSs = BS_type_count(t_)/2;
     end
 end
+
+netconfig.nb_macro_femto_BSs = netconfig.nb_femto_BSs + netconfig.nb_macro_BSs;
 
 % Get geographical positions of BSs
 BS_abs = zeros(nb_BSs,1);

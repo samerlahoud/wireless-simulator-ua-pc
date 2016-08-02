@@ -8,9 +8,11 @@ global netconfig;
 nb_users = netconfig.nb_users;
 nb_femto_BSs = netconfig.nb_femto_BSs;
 nb_macro_BSs = netconfig.nb_macro_BSs;
+nb_macro_femto_BSs = netconfig.nb_macro_femto_BSs;
 
-femto_to_femto_pathloss = BS_to_BS_pathloss(nb_macro_BSs+1:end,nb_macro_BSs+1:end);
-user_femto_pathloss = user_pathloss(:,nb_macro_BSs+1:end);
+femto_to_femto_pathloss = BS_to_BS_pathloss(nb_macro_BSs+1:nb_macro_femto_BSs,...
+    nb_macro_BSs+1:nb_macro_femto_BSs);
+user_femto_pathloss = user_pathloss(:,nb_macro_BSs+1:nb_macro_femto_BSs);
 femto_demand = zeros(nb_femto_BSs,1);
 
 user_femto_association = zeros(nb_users,nb_femto_BSs);

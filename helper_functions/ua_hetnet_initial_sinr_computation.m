@@ -7,20 +7,26 @@ RB_bandwidth = netconfig.RB_bandwidth;
 nb_RBs = netconfig.nb_RBs;
 nb_macro_BSs = netconfig.nb_macro_BSs;
 nb_femto_BSs = netconfig.nb_femto_BSs;
+nb_macro_femto_BSs = netconfig.nb_macro_femto_BSs;
+nb_mmwave_BSs = netconfig.nb_mmwave_BSs;
 macro_tx_power = netconfig.macro_tx_power;
 femto_tx_power = netconfig.femto_tx_power;
+mmwave_tx_power = netconfig.mmwave_tx_power;
 tx_antenna_gain = netconfig.tx_antenna_gain;
 rx_antenna_gain = netconfig.rx_antenna_gain;
 RB_bandwidth = netconfig.RB_bandwidth;
+mmwave_bandwidth = netconfig.mmwave_bandwidth;
 noise_density = netconfig.noise_density;
 
-% Define BS transmit power
+% Define BS transmit power per RB
+% Beware that there is no RB in mmwave
 tx_RB_power = [macro_tx_power*ones(1,nb_macro_BSs)./nb_RBs, ...
-            femto_tx_power*ones(1,nb_femto_BSs)]./nb_RBs;
+            femto_tx_power*ones(1,nb_femto_BSs)./nb_RBs, ...
+            mmwave_tx_power*ones(1,nb_mmwave_BSs)];
         
 % Received power and SINR matrices
 rx_RB_power = zeros(nb_users,nb_BSs);
-sinr_RB = zeros(nb_users,nb_BSs,nb_RBs);
+sinr_RB = zeros(nb_users,nb_macro_femto_BSs,nb_RBs);
 
 % Check for penetration loss
 for u = 1:nb_users
@@ -30,7 +36,7 @@ for u = 1:nb_users
 end
 
 for u = 1:nb_users
-    for b = 1:nb_BSs
+    for b = 1:nb_macro_femto_BSs
         % Iterate over allocated RB on BS b
         for k = find(RB_allocation(b,:)==1)
             interf = sum(rx_RB_power(u,RB_allocation(:,k)==1))-rx_RB_power(u,b);
@@ -44,7 +50,7 @@ end
 sinr = zeros(nb_users,nb_BSs);
 % SINR equals -Inf when femto demand is zero
 for u = 1:nb_users
-    for b = 1:nb_BSs
+    for b = 1:nb_macro_femto_BSs
         if(sum(RB_allocation(b,:)) == 0)
             sinr(u,b) = -Inf;
             continue;
@@ -57,6 +63,9 @@ for u = 1:nb_users
         % This is arithmectic mean (should we go for geometric?)
         tmp_sinr_real = tmp_sinr_real/sum(RB_allocation(b,:));
         sinr(u,b) = 10*log10(tmp_sinr_real);
+    end
+    for b = nb_macro_femto_BSs+1:nb_BSs
+        sinr(u,b) = 10*log10(rx_RB_power(u,b)/(noise_density*mmwave_bandwidth));
     end
 end         
 
@@ -78,7 +87,11 @@ for u = 1:nb_users
             peak_rate(u,b) = 0;
             continue;
         end
-        peak_rate(u,b) = peak_rate_range(peak_rate_round(1))*RB_bandwidth*sum(RB_allocation(b,:));
+        if b <= nb_macro_femto_BSs
+            peak_rate(u,b) = peak_rate_range(peak_rate_round(1))*RB_bandwidth*sum(RB_allocation(b,:));
+        else
+            peak_rate(u,b) = peak_rate_range(peak_rate_round(1))*mmwave_bandwidth;
+        end
     end
 end
 
