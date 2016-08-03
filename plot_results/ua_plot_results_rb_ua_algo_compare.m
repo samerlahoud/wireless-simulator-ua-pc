@@ -86,6 +86,30 @@ end
 figure_file_name = sprintf('-%dusers',nb_users);
 
 f=figure;
+
+y = [mean(cum_m1_macro_traffic),mean(cum_m1_femto_traffic),mean(cum_m1_mmwave_traffic); ...
+    mean(cum_m2_macro_traffic),mean(cum_m2_femto_traffic),mean(cum_m2_mmwave_traffic); ...
+    mean(cum_m3_macro_traffic),mean(cum_m3_femto_traffic),mean(cum_m3_mmwave_traffic); ...
+    mean(cum_m4_macro_traffic),mean(cum_m4_femto_traffic),mean(cum_m4_mmwave_traffic); ...
+    mean(cum_m5_macro_traffic),mean(cum_m5_femto_traffic),mean(cum_m5_mmwave_traffic)];
+
+errY = [std(cum_m1_macro_traffic),std(cum_m1_femto_traffic),std(cum_m1_mmwave_traffic); ...
+    std(cum_m2_macro_traffic),std(cum_m2_femto_traffic),std(cum_m2_mmwave_traffic); ...
+    std(cum_m3_macro_traffic),std(cum_m3_femto_traffic),std(cum_m3_mmwave_traffic); ...
+    std(cum_m4_macro_traffic),std(cum_m4_femto_traffic),std(cum_m4_mmwave_traffic); ...
+    std(cum_m5_macro_traffic),std(cum_m5_femto_traffic),std(cum_m5_mmwave_traffic)];
+
+h = barwitherr(errY, y);% Plot with errorbars
+
+set(gca,'XTickLabel',{'BR+BR', 'BR+Optim', 'Random+SINR', 'Sep-ch+Femto-First', 'Co-ch+SINR'})
+legend('Macro','Femto','mmWave')
+ylabel('Percentage of traffic')
+set(h(1),'FaceColor','k');
+ylim([0 110])
+print(f,'-depsc', sprintf('%s/rb-ua-traffic-perc%s.eps', output_dir, figure_file_name));
+savefig(sprintf('%s/rb-ua-traffic-perc%s.fig', output_dir, figure_file_name));
+
+f=figure;
 boxplot([cum_m1_macro_traffic, cum_m2_macro_traffic, cum_m3_macro_traffic, cum_m4_macro_traffic, cum_m5_macro_traffic],...
     'notch', 'off', 'Label', {'BR+BR', 'BR+Optim', 'Random+SINR', 'Sep-ch+Femto-First', 'Co-ch+SINR'});
 ylabel('Percentage of traffic on macro BSs');
