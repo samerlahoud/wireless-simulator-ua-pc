@@ -35,6 +35,7 @@ for t_ = 1:length(BS_type)
 end
 
 netconfig.nb_macro_femto_BSs = netconfig.nb_femto_BSs + netconfig.nb_macro_BSs;
+nb_macro_femto_BSs = netconfig.nb_macro_femto_BSs;
 
 % Get geographical positions of BSs
 BS_abs = zeros(nb_BSs,1);
@@ -84,10 +85,16 @@ end
 % Compute pathloss (this is pathgain in fact) with per site shadowing 
 pathloss = zeros(nb_users,nb_BSs); % real values
 for u = 1:nb_users
-    for b = 1:nb_BSs
-     pathloss(u,b) = networkPathlossMap.pathloss(user_x_idx(u),user_y_idx(u),b) * ...
-         networkShadowFadingMap.pathloss(user_x_idx(u),user_y_idx(u),eNodeBs(b).parent_eNodeB.id);
-    end                          
+    for b = 1:nb_macro_femto_BSs
+        pathloss(u,b) = networkPathlossMap.pathloss(user_x_idx(u),user_y_idx(u),b) * ...
+            networkShadowFadingMap.pathloss(user_x_idx(u),user_y_idx(u),eNodeBs(b).parent_eNodeB.id);
+    end
+    % This is very artficial for the moment, replace by real mmwave
+    % pathloss
+    for b=nb_macro_femto_BSs+1:nb_BSs
+        pathloss(u,b) = networkPathlossMap.pathloss(user_x_idx(u),user_y_idx(u),b) * ...
+            networkShadowFadingMap.pathloss(user_x_idx(u),user_y_idx(u),eNodeBs(b).parent_eNodeB.id)*1e5;
+    end
 end
 
 % Get real coordinates from pathloss map (the map is dangerousely inverted)

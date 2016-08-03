@@ -13,7 +13,7 @@ netconfig.macro_tx_power = 10^(4.3-3);    % in Watt (43dBm)
 netconfig.femto_tx_power = 10^(2.5-3);    % in Watt (25dBm)
 
 netconfig.mmwave_tx_power = 10^(0.5-3);    % in Watt (14dBm)
-netconfig.mmwave_bandwidth = 100*180e3;
+netconfig.mmwave_bandwidth = 30*180e3;
 
 netconfig.tx_antenna_gain = 10^(15/10);   % in dBi
 netconfig.rx_antenna_gain = 1;            % dBi "LTE, the UMTS long term evolution: from theory to practice by Stefania Sesia, Issam Toufik, Matthew Baker pg 517 (22.4.1)"

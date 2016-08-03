@@ -5,6 +5,7 @@ nb_users = netconfig.nb_users;
 nb_BSs = netconfig.nb_BSs;
 nb_femto_BSs = netconfig.nb_femto_BSs;
 nb_macro_BSs = netconfig.nb_macro_BSs;
+nb_macro_femto_BS = netconfig.nb_macro_femto_BSs;
 nb_RBs = netconfig.nb_RBs;
 
 output_dir = './output/user-association-output/';
@@ -12,18 +13,33 @@ output_dir = './output/user-association-output/';
 cum_m1_rate = [];
 cum_m1_obj = [];
 cum_m1_ua = [];
+cum_m1_macro_traffic = [];
+cum_m1_femto_traffic = [];
+cum_m1_mmwave_traffic = [];
 cum_m2_rate = [];
 cum_m2_obj = [];
 cum_m2_ua = [];
+cum_m2_macro_traffic = [];
+cum_m2_femto_traffic = [];
+cum_m2_mmwave_traffic = [];
 cum_m3_rate = [];
 cum_m3_obj = [];
 cum_m3_ua = [];
+cum_m3_macro_traffic = [];
+cum_m3_femto_traffic = [];
+cum_m3_mmwave_traffic = [];
 cum_m4_rate = [];
 cum_m4_obj = [];
 cum_m4_ua = [];
+cum_m4_macro_traffic = [];
+cum_m4_femto_traffic = [];
+cum_m4_mmwave_traffic = [];
 cum_m5_rate = [];
 cum_m5_obj = [];
 cum_m5_ua = [];
+cum_m5_macro_traffic = [];
+cum_m5_femto_traffic = [];
+cum_m5_mmwave_traffic = [];
 
 cum_optimal_pf_sinr_rank = [];
 
@@ -32,27 +48,63 @@ for i = 1:nb_iterations
     cum_m1_rate = [cum_m1_rate; m1_rate];
     cum_m1_obj = [cum_m1_obj; m1_obj];
     cum_m1_ua = [cum_m1_ua; m1_ua];
+    cum_m1_macro_traffic = [cum_m1_macro_traffic; sum(sum(m1_ua(:,1:nb_macro_BSs)))];
+    cum_m1_femto_traffic = [cum_m1_femto_traffic; sum(sum(m1_ua(:,nb_macro_BSs+1:nb_macro_femto_BS)))];
+    cum_m1_mmwave_traffic = [cum_m1_mmwave_traffic; sum(sum(m1_ua(:,nb_macro_femto_BS+1:nb_BSs)))];
     
     cum_m2_rate = [cum_m2_rate; m2_rate];
     cum_m2_obj = [cum_m2_obj; m2_obj];
     cum_m2_ua = [cum_m2_ua; m2_ua];
+    cum_m2_macro_traffic = [cum_m2_macro_traffic; sum(sum(m2_ua(:,1:nb_macro_BSs)))];
+    cum_m2_femto_traffic = [cum_m2_femto_traffic; sum(sum(m2_ua(:,nb_macro_BSs+1:nb_macro_femto_BS)))];
+    cum_m2_mmwave_traffic = [cum_m2_mmwave_traffic; sum(sum(m2_ua(:,nb_macro_femto_BS+1:nb_BSs)))];
     
     cum_m3_rate = [cum_m3_rate; m3_rate];
     cum_m3_obj = [cum_m3_obj; m3_obj];
     cum_m3_ua = [cum_m3_ua; m3_ua];
+    cum_m3_macro_traffic = [cum_m3_macro_traffic; sum(sum(m3_ua(:,1:nb_macro_BSs)))];
+    cum_m3_femto_traffic = [cum_m3_femto_traffic; sum(sum(m3_ua(:,nb_macro_BSs+1:nb_macro_femto_BS)))];
+    cum_m3_mmwave_traffic = [cum_m3_mmwave_traffic; sum(sum(m3_ua(:,nb_macro_femto_BS+1:nb_BSs)))];
     
     cum_m4_rate = [cum_m4_rate; m4_rate];
     cum_m4_obj = [cum_m4_obj; m4_obj];
     cum_m4_ua = [cum_m4_ua; m4_ua];
+    cum_m4_macro_traffic = [cum_m4_macro_traffic; sum(sum(m4_ua(:,1:nb_macro_BSs)))];
+    cum_m4_femto_traffic = [cum_m4_femto_traffic; sum(sum(m4_ua(:,nb_macro_BSs+1:nb_macro_femto_BS)))];
+    cum_m4_mmwave_traffic = [cum_m4_mmwave_traffic; sum(sum(m4_ua(:,nb_macro_femto_BS+1:nb_BSs)))];
     
     cum_m5_rate = [cum_m5_rate; m5_rate];
     cum_m5_obj = [cum_m5_obj; m5_obj];
     cum_m5_ua = [cum_m5_ua; m5_ua];
+    cum_m5_macro_traffic = [cum_m5_macro_traffic; sum(sum(m5_ua(:,1:nb_macro_BSs)))];
+    cum_m5_femto_traffic = [cum_m5_femto_traffic; sum(sum(m5_ua(:,nb_macro_BSs+1:nb_macro_femto_BS)))];
+    cum_m5_mmwave_traffic = [cum_m5_mmwave_traffic; sum(sum(m5_ua(:,nb_macro_femto_BS+1:nb_BSs)))];
 
 end
 
 % Plot results
 figure_file_name = sprintf('-%dusers',nb_users);
+
+f=figure;
+boxplot([cum_m1_macro_traffic, cum_m2_macro_traffic, cum_m3_macro_traffic, cum_m4_macro_traffic, cum_m5_macro_traffic],...
+    'notch', 'off', 'Label', {'BR+BR', 'BR+Optim', 'Random+SINR', 'Sep-ch+Femto-First', 'Co-ch+SINR'});
+ylabel('Percentage of traffic on macro BSs');
+print(f,'-depsc', sprintf('%s/rb-ua-macro-traffic%s.eps', output_dir, figure_file_name));
+savefig(sprintf('%s/rb-ua-macro-traffic%s.fig', output_dir, figure_file_name));
+
+f=figure;
+boxplot([cum_m1_femto_traffic, cum_m2_femto_traffic, cum_m3_femto_traffic, cum_m4_femto_traffic, cum_m5_femto_traffic],...
+    'notch', 'off', 'Label', {'BR+BR', 'BR+Optim', 'Random+SINR', 'Sep-ch+Femto-First', 'Co-ch+SINR'});
+ylabel('Percentage of traffic on femto BSs');
+print(f,'-depsc', sprintf('%s/rb-ua-femto-traffic%s.eps', output_dir, figure_file_name));
+savefig(sprintf('%s/rb-ua-femto-traffic%s.fig', output_dir, figure_file_name));
+
+f=figure;
+boxplot([cum_m1_mmwave_traffic, cum_m2_mmwave_traffic, cum_m3_mmwave_traffic, cum_m4_mmwave_traffic, cum_m5_mmwave_traffic],...
+    'notch', 'off', 'Label', {'BR+BR', 'BR+Optim', 'Random+SINR', 'Sep-ch+Femto-First', 'Co-ch+SINR'});
+ylabel('Percentage of traffic on mmwave BSs');
+print(f,'-depsc', sprintf('%s/rb-ua-mmwave-traffic%s.eps', output_dir, figure_file_name));
+savefig(sprintf('%s/rb-ua-mmwave-traffic%s.fig', output_dir, figure_file_name));
 
 f=figure;
 boxplot([cum_m1_obj, cum_m2_obj, cum_m3_obj, cum_m4_obj, cum_m5_obj],...

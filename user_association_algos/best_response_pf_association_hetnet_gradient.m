@@ -69,7 +69,7 @@ while(1)
             %cumulative_user_association = [cumulative_user_association;user_association];
         end
     end
-    association_convergence = norm(user_association - previous_user_association);
+    association_convergence = norm(user_association - previous_user_association)
     nb_rounds = nb_rounds + 1;
     if(association_convergence < global_convergence_eps)
         % round after convergence for NE test
