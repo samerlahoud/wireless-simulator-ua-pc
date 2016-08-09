@@ -1,0 +1,96 @@
+% This file was created by matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=0.951\figurewidth,
+height=\figureheight,
+at={(0\figurewidth,0\figureheight)},
+scale only axis,
+xmin=0.5,
+xmax=2.5,
+xtick={1,2},
+xticklabels={{Central-EE},{Distributed-EE}},
+ymin=0.04098323255,
+ymax=1.63598412245,
+ylabel={Computation time (s)},
+axis background/.style={fill=white}
+]
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+1	0.30098003\\
+1	0.413425922\\
+};
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+2	0.396129982\\
+2	0.477258915\\
+};
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+1	0.113483273\\
+1	0.183272662\\
+};
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+2	0.207722867\\
+2	0.307633721\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+0.925	0.413425922\\
+1.075	0.413425922\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+1.925	0.477258915\\
+2.075	0.477258915\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+0.925	0.113483273\\
+1.075	0.113483273\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+1.925	0.207722867\\
+2.075	0.207722867\\
+};
+\addplot [color=blue,solid,forget plot]
+  table[row sep=crcr]{%
+0.85	0.183272662\\
+0.85	0.30098003\\
+1.15	0.30098003\\
+1.15	0.183272662\\
+0.85	0.183272662\\
+};
+\addplot [color=blue,solid,forget plot]
+  table[row sep=crcr]{%
+1.85	0.307633721\\
+1.85	0.396129982\\
+2.15	0.396129982\\
+2.15	0.307633721\\
+1.85	0.307633721\\
+};
+\addplot [color=red,solid,forget plot]
+  table[row sep=crcr]{%
+0.85	0.2549015175\\
+1.15	0.2549015175\\
+};
+\addplot [color=red,solid,forget plot]
+  table[row sep=crcr]{%
+1.85	0.350359837\\
+2.15	0.350359837\\
+};
+\addplot [color=black,only marks,mark=+,mark options={solid,draw=red},forget plot]
+  table[row sep=crcr]{%
+1	0.479089037\\
+1	0.876583408\\
+};
+\addplot [color=black,only marks,mark=+,mark options={solid,draw=red},forget plot]
+  table[row sep=crcr]{%
+2	0.649303557\\
+2	1.563484082\\
+};
+\end{axis}
+\end{tikzpicture}%

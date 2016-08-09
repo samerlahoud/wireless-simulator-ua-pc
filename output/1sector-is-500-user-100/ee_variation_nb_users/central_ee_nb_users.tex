@@ -1,0 +1,40 @@
+% This file was created by matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=0.951\figurewidth,
+height=\figureheight,
+at={(0\figurewidth,0\figureheight)},
+scale only axis,
+xmin=5,
+xmax=25,
+xlabel={Number of users},
+ymin=0,
+ymax=7,
+ylabel={Energy efficiency},
+axis background/.style={fill=white},
+legend style={at={(0.03,0.97)},anchor=north west,legend cell align=left,align=left,draw=white!15!black}
+]
+\addplot [color=red,solid,mark=x,mark options={solid}]
+  table[row sep=crcr]{%
+5	1.63333\\
+10	3.0116\\
+15	4.84654\\
+20	5.80636\\
+25	6.59866\\
+};
+\addlegendentry{Normal interference};
+
+\addplot [color=blue,solid,mark=o,mark options={solid}]
+  table[row sep=crcr]{%
+5	0.33805\\
+10	0.61148\\
+15	0.60131\\
+20	0.40911\\
+25	0.23669\\
+};
+\addlegendentry{High interference};
+
+\end{axis}
+\end{tikzpicture}%

@@ -1,0 +1,95 @@
+% This file was created by matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=0.951\figurewidth,
+height=\figureheight,
+at={(0\figurewidth,0\figureheight)},
+scale only axis,
+unbounded coords=jump,
+xmin=0.5,
+xmax=2.5,
+xtick={1,2},
+xticklabels={{Central-EE},{Distributed-EE}},
+ymin=-0.161732855627498,
+ymax=0.745085500076329,
+ylabel={Energy Efficiency},
+axis background/.style={fill=white}
+]
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+1	0.484894465567775\\
+1	0.703866483907973\\
+};
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+2	0.283552848855916\\
+2	0.421674085708685\\
+};
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+1	-0.0990109213592161\\
+1	0.135296997051232\\
+};
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+2	-0.120513839459142\\
+2	0.0726504114719523\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+0.925	0.703866483907973\\
+1.075	0.703866483907973\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+1.925	0.421674085708685\\
+2.075	0.421674085708685\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+0.925	-0.0990109213592161\\
+1.075	-0.0990109213592161\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+1.925	-0.120513839459142\\
+2.075	-0.120513839459142\\
+};
+\addplot [color=blue,solid,forget plot]
+  table[row sep=crcr]{%
+0.85	0.135296997051232\\
+0.85	0.484894465567775\\
+1.15	0.484894465567775\\
+1.15	0.135296997051232\\
+0.85	0.135296997051232\\
+};
+\addplot [color=blue,solid,forget plot]
+  table[row sep=crcr]{%
+1.85	0.0726504114719523\\
+1.85	0.283552848855916\\
+2.15	0.283552848855916\\
+2.15	0.0726504114719523\\
+1.85	0.0726504114719523\\
+};
+\addplot [color=red,solid,forget plot]
+  table[row sep=crcr]{%
+0.85	0.321258548770916\\
+1.15	0.321258548770916\\
+};
+\addplot [color=red,solid,forget plot]
+  table[row sep=crcr]{%
+1.85	0.176198480843694\\
+2.15	0.176198480843694\\
+};
+\addplot [color=black,only marks,mark=+,mark options={solid,draw=red},forget plot]
+  table[row sep=crcr]{%
+nan	nan\\
+};
+\addplot [color=black,only marks,mark=+,mark options={solid,draw=red},forget plot]
+  table[row sep=crcr]{%
+nan	nan\\
+};
+\end{axis}
+\end{tikzpicture}%

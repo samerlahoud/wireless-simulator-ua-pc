@@ -1,0 +1,7 @@
+To Do
+* Compare with scheduling strategies ? PF (RB nb less or more than user nb)
+* Compare CVX with gradient time convergence
+* check log2 log10
+
+* changer pmin EE va diminuer
+* changer pmax pour high interf

@@ -1,0 +1,62 @@
+% This file was created by matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=0.991\figurewidth,
+height=\figureheight,
+at={(0\figurewidth,0\figureheight)},
+scale only axis,
+separate axis lines,
+every outer x axis line/.append style={black},
+every x tick label/.append style={font=\color{black}},
+xmin=0.5,
+xmax=1.5,
+xtick={1},
+xticklabels={{Distributed-EE}},
+every outer y axis line/.append style={black},
+every y tick label/.append style={font=\color{black}},
+ymin=4.85,
+ymax=8.15,
+ylabel={Best response rounds},
+axis background/.style={fill=white}
+]
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+1	6\\
+1	7\\
+};
+\addplot [color=black,dashed,forget plot]
+  table[row sep=crcr]{%
+1	5\\
+1	5\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+0.9625	7\\
+1.0375	7\\
+};
+\addplot [color=black,solid,forget plot]
+  table[row sep=crcr]{%
+0.9625	5\\
+1.0375	5\\
+};
+\addplot [color=blue,solid,forget plot]
+  table[row sep=crcr]{%
+0.925	5\\
+0.925	6\\
+1.075	6\\
+1.075	5\\
+0.925	5\\
+};
+\addplot [color=red,solid,forget plot]
+  table[row sep=crcr]{%
+0.925	6\\
+1.075	6\\
+};
+\addplot [color=blue,only marks,mark=+,mark options={solid,draw=red},forget plot]
+  table[row sep=crcr]{%
+1	8\\
+};
+\end{axis}
+\end{tikzpicture}%
