@@ -1,9 +1,8 @@
 # Wireless Cellular Simulator for Radio Resource Management
-<<<<<<< HEAD
+
 test readme mardi 10h22
 reponse 10h41
 =======
->>>>>>> refs/remotes/origin/master
 
 ## Running HetNet Simulation
 
