@@ -27,7 +27,7 @@ for t_ = 1:length(BS_type)
     if ismember(BS_type(t_),'macro')
         netconfig.nb_macro_BSs = BS_type_count(t_);
     elseif ismember(BS_type(t_),'femto')
-        % Half of femto postions corresponds to femto BSs, 
+        % Half of femto positions corresponds to femto BSs, 
         % Other half to mmwave BSs.
         netconfig.nb_femto_BSs = BS_type_count(t_)/2;
         netconfig.nb_mmwave_BSs = BS_type_count(t_)/2;
@@ -82,23 +82,25 @@ elseif strcmp(user_distribution, 'normal')
     user_y_idx = ceil(random(y_pd_t,nb_users,1));
 end
 
+% Get real coordinates from pathloss map (the map is dangerousely inverted)
+% Real coordinates are used to compute pathloss in mmWave communications, using Rappaport model
+user_ord = networkPathlossMap.data_res.*(user_x_idx-1)+networkPathlossMap.roi_y(1);
+user_abs = networkPathlossMap.data_res.*(user_y_idx-1)+networkPathlossMap.roi_x(1);
+
 % Compute pathloss (this is pathgain in fact) with per site shadowing 
 pathloss = zeros(nb_users,nb_BSs); % real values
+user_to_mmwaveBS_distance_matrix = zeros(nb_users,nb_BSs-nb_macro_femto_BSs);
 for u = 1:nb_users
     for b = 1:nb_macro_femto_BSs
         pathloss(u,b) = networkPathlossMap.pathloss(user_x_idx(u),user_y_idx(u),b) * ...
             networkShadowFadingMap.pathloss(user_x_idx(u),user_y_idx(u),eNodeBs(b).parent_eNodeB.id);
     end
-    % This is very artficial for the moment, replace by real mmwave
-    % pathloss
+
     for b=nb_macro_femto_BSs+1:nb_BSs
-        pathloss(u,b) = networkPathlossMap.pathloss(user_x_idx(u),user_y_idx(u),b) * ...
-            networkShadowFadingMap.pathloss(user_x_idx(u),user_y_idx(u),eNodeBs(b).parent_eNodeB.id)*1e5;
+        user_to_mmwaveBS_distance_matrix(u,b-nb_macro_femto_BSs) = pdist([[user_abs(u) user_ord(u)];[BS_abs(b) BS_ord(b)]],'euclidean');
+        % mmWave frequency = 28 GHz or 73 GHz
+        pathloss(u,b) = 10.^(mmWavePathLossModel(user_to_mmwaveBS_distance_matrix(u,b-nb_macro_femto_BSs),28)./10);
     end
 end
-
-% Get real coordinates from pathloss map (the map is dangerousely inverted)
-user_ord = networkPathlossMap.data_res.*(user_x_idx-1)+networkPathlossMap.roi_y(1);
-user_abs = networkPathlossMap.data_res.*(user_y_idx-1)+networkPathlossMap.roi_x(1);
 
 end
