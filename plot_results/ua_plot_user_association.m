@@ -20,7 +20,7 @@ plot(macro_BS_abs,macro_BS_ord,'b^','MarkerFaceColor','b','MarkerSize',8);
 plot(femto_BS_abs,femto_BS_ord,'r^','MarkerFaceColor','r');
 plot(user_abs, user_ord, 'x');
 for u = 1:nb_users
-    associated_BS_idx = find(user_association(u,:)>=1e-3);
+    associated_BS_idx = find(m5_ua(u,:)>=1e-3);
     for b = associated_BS_idx
         plot([user_abs(u),BS_abs(b)],[user_ord(u),BS_ord(b)],'b:');
     end

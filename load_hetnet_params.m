@@ -12,9 +12,6 @@ netconfig.RB_bandwidth = 180e3;         % Frequency in Hz
 netconfig.macro_tx_power = 10^(4.3-3);    % in Watt (43dBm)
 netconfig.femto_tx_power = 10^(2.5-3);    % in Watt (25dBm)
 
-netconfig.mmwave_tx_power = 10^(0.5-3);    % in Watt (14dBm)
-netconfig.mmwave_bandwidth = 30*180e3;
-
 netconfig.tx_antenna_gain = 10^(15/10);   % in dBi
 netconfig.rx_antenna_gain = 1;            % dBi "LTE, the UMTS long term evolution: from theory to practice by Stefania Sesia, Issam Toufik, Matthew Baker pg 517 (22.4.1)"
 netconfig.noise_density        = 10^(-20.4);
@@ -23,3 +20,9 @@ netconfig.femto_first_sinr = -2;
 netconfig.range_extension_bias = 5;
 netconfig.reuse_min_pathloss = 1e+13;
 netconfig.user_distribution = 'normal'; % 'uniform' or 'normal'
+
+% mmwave params
+netconfig.mmwave_tx_power = 1;    % in Watt (30dBm)
+netconfig.mmwave_bandwidth = 1e9; % 1 GHz
+netconfig.mmwave_tx_antenna_gain = 10^(24.5/10);   % in dBi
+netconfig.mmwave_rx_antenna_gain = 10^(24.5/10);

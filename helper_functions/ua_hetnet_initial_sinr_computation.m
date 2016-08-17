@@ -3,7 +3,6 @@ function [peak_rate, sinr] = ua_hetnet_initial_sinr_computation(pathloss, RB_all
 global netconfig;
 nb_BSs = netconfig.nb_BSs;
 nb_users = netconfig.nb_users;
-RB_bandwidth = netconfig.RB_bandwidth;
 nb_RBs = netconfig.nb_RBs;
 nb_macro_BSs = netconfig.nb_macro_BSs;
 nb_femto_BSs = netconfig.nb_femto_BSs;
@@ -14,6 +13,8 @@ femto_tx_power = netconfig.femto_tx_power;
 mmwave_tx_power = netconfig.mmwave_tx_power;
 tx_antenna_gain = netconfig.tx_antenna_gain;
 rx_antenna_gain = netconfig.rx_antenna_gain;
+mmwave_tx_antenna_gain = netconfig.mmwave_tx_antenna_gain;
+mmwave_rx_antenna_gain = netconfig.mmwave_rx_antenna_gain;
 RB_bandwidth = netconfig.RB_bandwidth;
 mmwave_bandwidth = netconfig.mmwave_bandwidth;
 noise_density = netconfig.noise_density;
@@ -30,19 +31,24 @@ sinr_RB = zeros(nb_users,nb_macro_femto_BSs,nb_RBs);
 
 % Check for penetration loss
 for u = 1:nb_users
-    for b = 1:nb_BSs
+    for b = 1:nb_macro_femto_BSs
         rx_RB_power(u,b) = (tx_RB_power(b)*tx_antenna_gain*rx_antenna_gain)/pathloss(u,b);
+    end
+    for b = nb_macro_femto_BSs+1:nb_BSs
+        rx_RB_power(u,b) = (tx_RB_power(b)*mmwave_tx_antenna_gain*mmwave_rx_antenna_gain)/pathloss(u,b);
     end
 end
 
+% SINR per RB is expressed only for macro and femto BSs
+% Skip this if you want to compute mmwave SINR
 for u = 1:nb_users
     for b = 1:nb_macro_femto_BSs
         % Iterate over allocated RB on BS b
         for k = find(RB_allocation(b,:)==1)
             interf = sum(rx_RB_power(u,RB_allocation(:,k)==1))-rx_RB_power(u,b);
+            sinr_RB(u,b,k) = rx_RB_power(u,b)/(noise_density*RB_bandwidth + interf);
+            %sinr(u,b) = 10*log10(sinr_real);
         end
-        sinr_RB(u,b,k) = rx_RB_power(u,b)/(noise_density*RB_bandwidth + interf);
-        %sinr(u,b) = 10*log10(sinr_real);
     end
 end
 
@@ -64,8 +70,10 @@ for u = 1:nb_users
         tmp_sinr_real = tmp_sinr_real/sum(RB_allocation(b,:));
         sinr(u,b) = 10*log10(tmp_sinr_real);
     end
+    % Reuse 1 model for mmwave
     for b = nb_macro_femto_BSs+1:nb_BSs
-        sinr(u,b) = 10*log10(rx_RB_power(u,b)/(noise_density*mmwave_bandwidth));
+        mmwave_interf = sum(rx_RB_power(u,:))-rx_RB_power(u,b);
+        sinr(u,b) = 10*log10(rx_RB_power(u,b)/(noise_density*mmwave_bandwidth + mmwave_interf));
     end
 end         
 
@@ -90,7 +98,7 @@ for u = 1:nb_users
         if b <= nb_macro_femto_BSs
             peak_rate(u,b) = peak_rate_range(peak_rate_round(1))*RB_bandwidth*sum(RB_allocation(b,:));
         else
-            peak_rate(u,b) = peak_rate_range(peak_rate_round(1))*mmwave_bandwidth;
+            peak_rate(u,b) = mmwave_bandwidth*log2(1+10^(sinr(u,b)/10));
         end
     end
 end
