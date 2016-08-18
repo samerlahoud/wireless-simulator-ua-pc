@@ -24,5 +24,5 @@ netconfig.user_distribution = 'normal'; % 'uniform' or 'normal'
 % mmwave params
 netconfig.mmwave_tx_power = 1;    % in Watt (30dBm)
 netconfig.mmwave_bandwidth = 1e9; % 1 GHz
-netconfig.mmwave_tx_antenna_gain = 10^(24.5/10);   % in dBi
-netconfig.mmwave_rx_antenna_gain = 10^(24.5/10);
+netconfig.mmwave_tx_antenna_gain = 10^(15/10);   % 24 in dBi in Rappapport et al. 
+netconfig.mmwave_rx_antenna_gain = 1;

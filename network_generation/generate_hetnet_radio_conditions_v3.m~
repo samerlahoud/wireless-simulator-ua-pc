@@ -102,9 +102,9 @@ for u = 1:nb_users
             networkShadowFadingMap.pathloss(user_x_idx(u),user_y_idx(u),eNodeBs(b).parent_eNodeB.id);
     end
     for b = nb_macro_BSs+1:nb_macro_femto_BSs
-        reordered_index = 2*b - (nb_macro_BSs+1);
-        pathloss(u,b) = networkPathlossMap.pathloss(user_x_idx(u),user_y_idx(u),reordered_index) * ...
-            networkShadowFadingMap.pathloss(user_x_idx(u),user_y_idx(u),eNodeBs(reordered_index).parent_eNodeB.id);
+        reordered_i
+        pathloss(u,b) = networkPathlossMap.pathloss(user_x_idx(u),user_y_idx(u),2*b-1) * ...
+            networkShadowFadingMap.pathloss(user_x_idx(u),user_y_idx(u),eNodeBs(2*b-1).parent_eNodeB.id);
     end
     for b=nb_macro_femto_BSs+1:nb_BSs
         user_to_mmwaveBS_distance_matrix(u,b-nb_macro_femto_BSs) = pdist([[user_abs(u) user_ord(u)];[BS_abs(b) BS_ord(b)]],'euclidean');
