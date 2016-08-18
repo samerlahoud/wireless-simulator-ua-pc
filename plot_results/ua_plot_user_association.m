@@ -23,7 +23,71 @@ plot(femto_BS_abs,femto_BS_ord,'r^','MarkerFaceColor','r');
 plot(mmwave_BS_abs,mmwave_BS_ord,'g^','MarkerFaceColor','g');
 plot(user_abs, user_ord, 'x');
 for u = 1:nb_users
+    associated_BS_idx = find(m1_ua(u,:)>=1e-3);
+    for b = associated_BS_idx
+        plot([user_abs(u),BS_abs(b)],[user_ord(u),BS_ord(b)],'b:');
+    end
+end
+%print -deps -color test.eps
+hold off
+
+figure(2);
+voronoi(macro_BS_abs, macro_BS_ord,'k');
+hold on
+plot(macro_BS_abs,macro_BS_ord,'b^','MarkerFaceColor','b','MarkerSize',8);
+plot(femto_BS_abs,femto_BS_ord,'r^','MarkerFaceColor','r');
+plot(mmwave_BS_abs,mmwave_BS_ord,'g^','MarkerFaceColor','g');
+plot(user_abs, user_ord, 'x');
+for u = 1:nb_users
+    associated_BS_idx = find(m2_ua(u,:)>=1e-3);
+    for b = associated_BS_idx
+        plot([user_abs(u),BS_abs(b)],[user_ord(u),BS_ord(b)],'b:');
+    end
+end
+%print -deps -color test.eps
+hold off
+
+figure(3);
+voronoi(macro_BS_abs, macro_BS_ord,'k');
+hold on
+plot(macro_BS_abs,macro_BS_ord,'b^','MarkerFaceColor','b','MarkerSize',8);
+plot(femto_BS_abs,femto_BS_ord,'r^','MarkerFaceColor','r');
+plot(mmwave_BS_abs,mmwave_BS_ord,'g^','MarkerFaceColor','g');
+plot(user_abs, user_ord, 'x');
+for u = 1:nb_users
     associated_BS_idx = find(m3_ua(u,:)>=1e-3);
+    for b = associated_BS_idx
+        plot([user_abs(u),BS_abs(b)],[user_ord(u),BS_ord(b)],'b:');
+    end
+end
+%print -deps -color test.eps
+hold off
+
+figure(4);
+voronoi(macro_BS_abs, macro_BS_ord,'k');
+hold on
+plot(macro_BS_abs,macro_BS_ord,'b^','MarkerFaceColor','b','MarkerSize',8);
+plot(femto_BS_abs,femto_BS_ord,'r^','MarkerFaceColor','r');
+plot(mmwave_BS_abs,mmwave_BS_ord,'g^','MarkerFaceColor','g');
+plot(user_abs, user_ord, 'x');
+for u = 1:nb_users
+    associated_BS_idx = find(m4_ua(u,:)>=1e-3);
+    for b = associated_BS_idx
+        plot([user_abs(u),BS_abs(b)],[user_ord(u),BS_ord(b)],'b:');
+    end
+end
+%print -deps -color test.eps
+hold off
+
+figure(5);
+voronoi(macro_BS_abs, macro_BS_ord,'k');
+hold on
+plot(macro_BS_abs,macro_BS_ord,'b^','MarkerFaceColor','b','MarkerSize',8);
+plot(femto_BS_abs,femto_BS_ord,'r^','MarkerFaceColor','r');
+plot(mmwave_BS_abs,mmwave_BS_ord,'g^','MarkerFaceColor','g');
+plot(user_abs, user_ord, 'x');
+for u = 1:nb_users
+    associated_BS_idx = find(m5_ua(u,:)>=1e-3);
     for b = associated_BS_idx
         plot([user_abs(u),BS_abs(b)],[user_ord(u),BS_ord(b)],'b:');
     end

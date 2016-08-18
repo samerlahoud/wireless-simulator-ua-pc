@@ -109,7 +109,7 @@ for u = 1:nb_users
     for b=nb_macro_femto_BSs+1:nb_BSs
         user_to_mmwaveBS_distance_matrix(u,b-nb_macro_femto_BSs) = pdist([[user_abs(u) user_ord(u)];[BS_abs(b) BS_ord(b)]],'euclidean');
         % mmWave frequency = 28 GHz or 73 GHz
-        pathloss(u,b) = 10.^(mmWavePathLossModel(user_to_mmwaveBS_distance_matrix(u,b-nb_macro_femto_BSs),28)./10);
+        pathloss(u,b) = 10.^(mmWavePathLossModel(user_to_mmwaveBS_distance_matrix(u,b-nb_macro_femto_BSs),73)./10);
     end
 end
 

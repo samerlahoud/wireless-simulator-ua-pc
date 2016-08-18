@@ -13,7 +13,8 @@ function [ path_loss ] = mmWavePathLossModel( distance_UE_BS, frequency)
 mean_shadowing= 0; %in dB
 
 % Randomly choose between a LOS (LOS = 1) and a NLOS environment (LOS = 0)
-LOS = randi([0 1],1,1);
+%LOS = randi([0 1],1,1);
+LOS = 0;
 
 % 30 dBm RF power, 24.5 dBi gain at both TX and RX sides
 
