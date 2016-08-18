@@ -1,5 +1,5 @@
 function [BS_abs, BS_ord, user_abs, user_ord, pathloss, BS_to_BS_pathloss] ...
-    = generate_hetnet_radio_conditions_v4(run_instance)
+    = generate_hetnet_radio_conditions_femto_cost231()
 % COST231 model for radio conditions
 
 rng('shuffle')

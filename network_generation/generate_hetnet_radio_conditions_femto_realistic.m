@@ -1,4 +1,4 @@
-function [peak_rate, pathloss, sinr] = generate_hetnet_radio_conditions
+function [peak_rate, pathloss, sinr] = generate_hetnet_radio_conditions_femto_realistic
 rng('shuffle')
 
 % Get global configuration parameters

@@ -1,5 +1,5 @@
 function [BS_abs, BS_ord, user_abs, user_ord, pathloss, BS_to_BS_pathloss] ...
-    = generate_hetnet_radio_conditions_v3()
+    = generate_hetnet_radio_conditions_femto_mmwave()
 % This is based on the Vienna LTE Simulator
 % Radio model includes shadowing and trisector antennas
 
