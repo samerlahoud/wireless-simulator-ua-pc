@@ -1,4 +1,5 @@
 - Adding LTE-simulator to the MATLAB path in order to properly load the saved objects
+- cd LTE' System Level Simulator v1.8'/sim_main_launcher_files/
 - LTE System Level Simulator v1.8, launch LTE_sim_main_launcher_demo_modified_basic
 get file from data_files/network_caches
 - CVX licence univ-rennes1.fr
