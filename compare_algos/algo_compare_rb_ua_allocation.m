@@ -6,7 +6,7 @@ nb_users = netconfig.nb_users;
 % Best response RB allocation + BR UA
 [m1_RB_allocation, m1_nb_rounds] = rb_allocation_reuse1_best_response_hetnet(BS_to_BS_pathloss, femto_demand);
 [m1_peak_rate, m1_sinr] = ua_hetnet_initial_sinr_computation(pathloss, m1_RB_allocation);
-m1_ua = best_response_pf_association_hetnet_gradient(m1_peak_rate);
+m1_ua = best_response_pf_association_hetnet_gradient(m1_peak_rate); %% This is the slowest algorithm to converge
 [m1_rate, m1_obj] = ua_hetnet_objective_computation(m1_peak_rate, m1_ua);
 
 % Best response RB allocation + optimal UA

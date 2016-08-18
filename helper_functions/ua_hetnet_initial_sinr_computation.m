@@ -72,7 +72,7 @@ for u = 1:nb_users
     end
     % Reuse 1 model for mmwave
     for b = nb_macro_femto_BSs+1:nb_BSs
-        mmwave_interf = sum(rx_RB_power(u,:))-rx_RB_power(u,b);
+        mmwave_interf = sum(rx_RB_power(u,nb_macro_femto_BSs+1:nb_BSs))-rx_RB_power(u,b);
         sinr(u,b) = 10*log10(rx_RB_power(u,b)/(noise_density*mmwave_bandwidth + mmwave_interf));
     end
 end         
@@ -98,7 +98,11 @@ for u = 1:nb_users
         if b <= nb_macro_femto_BSs
             peak_rate(u,b) = peak_rate_range(peak_rate_round(1))*RB_bandwidth*sum(RB_allocation(b,:));
         else
-            peak_rate(u,b) = mmwave_bandwidth*log2(1+10^(sinr(u,b)/10));
+            if sinr(u,b) < -20
+                    peak_rate(u,b) = 0;
+            else
+                peak_rate(u,b) = mmwave_bandwidth*log2(1+10^(sinr(u,b)/10));
+            end
         end
     end
 end
