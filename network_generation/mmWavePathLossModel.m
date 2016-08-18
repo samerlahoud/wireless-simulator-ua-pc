@@ -12,28 +12,28 @@ function [ path_loss ] = mmWavePathLossModel( distance_UE_BS, frequency)
                       
 mean_shadowing= 0; %in dB
 
-% Randomly choose between a LOS (LOS = 1) and a NLOS environment (LOS = 0)
-%LOS = randi([0 1],1,1);
-LOS = 0;
+% Choose between a LOS and a NLOS environment 
+% P(LOS) = 0.1
+LOS = rand;
 
 % 30 dBm RF power, 24.5 dBi gain at both TX and RX sides
 
-if ((frequency == 28) && (LOS ==1)) % LOS propagation environment
+if ((frequency == 28) && (LOS <0.1)) % LOS propagation environment
     alpha = 61.4;
     betta = 2;
     std_shadowing = 5.8; % in dB;
     
-elseif ((frequency == 28) && (LOS == 0)) % NLOS propagation environment
+elseif ((frequency == 28) && (LOS >= 0.1)) % NLOS propagation environment
     alpha = 72.0;
     betta = 2.92;
     std_shadowing = 8.7;
     
-elseif ((frequency == 73) && (LOS ==1)) % LOS propagation environment
+elseif ((frequency == 73) && (LOS <0.1)) % LOS propagation environment
     alpha = 69.8;
     betta = 2;
     std_shadowing = 5.8;
     
-elseif ((frequency == 73) && (LOS ==0)) % NLOS propagation environment
+elseif ((frequency == 73) && (LOS >=0.1)) % NLOS propagation environment
     alpha = 82.7;
     betta = 2.69;
     std_shadowing = 7.7;
