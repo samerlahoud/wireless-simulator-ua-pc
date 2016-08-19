@@ -20,7 +20,7 @@ reuse_min_pathloss = netconfig.reuse_min_pathloss;
 %     'pathloss', 'BS_to_BS_pathloss', 'peak_rate', 'sinr', 'femto_demand', 'RB_allocation');
 % end
 
-%% Compare RB allocation with opitmal UA
+% Compare RB allocation with opitmal UA
 % for i = 1:nb_iterations
 %     [BS_abs, BS_ord, user_abs, user_ord, pathloss, BS_to_BS_pathloss]=generate_hetnet_radio_conditions_femto_mmwave;
 %     [femto_demand] = ua_femto_demand_computation(pathloss, BS_to_BS_pathloss, reuse_min_pathloss, nb_RBs/2);
@@ -33,7 +33,7 @@ reuse_min_pathloss = netconfig.reuse_min_pathloss;
 
 %% Compare Selected RB allocation and UA
 for i = 1:nb_iterations
-    [BS_abs, BS_ord, user_abs, user_ord, pathloss, BS_to_BS_pathloss]=generate_hetnet_radio_conditions_femto_mmwave;
+    [BS_abs, BS_ord, user_abs, user_ord, pathloss, BS_to_BS_pathloss]=generate_hetnet_radio_conditions_femto_mmwave_variable;
     [femto_demand] = ua_femto_demand_computation(pathloss, BS_to_BS_pathloss, reuse_min_pathloss, nb_RBs/2);
     algo_compare_rb_ua_allocation(pathloss, BS_to_BS_pathloss, femto_demand, i);
     result_file_name = sprintf('./output/user-association-output/radio-conditions-%dusers-%drun.mat', nb_users, i);

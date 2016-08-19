@@ -17,7 +17,7 @@ femto_demand = zeros(nb_femto_BSs,1);
 
 user_femto_association = zeros(nb_users,nb_femto_BSs);
 for u = 1:nb_users
-    [max_user_pathloss,femto_idx] = min(user_femto_pathloss(u,:));
+    [~,femto_idx] = min(user_femto_pathloss(u,:));
     user_femto_association(u,femto_idx) = 1;
 end
 
@@ -25,13 +25,18 @@ nb_users_per_femto = sum(user_femto_association)';
 nb_concurrent_users_per_femto = zeros(nb_femto_BSs,1);
 
 for f=1:nb_femto_BSs
-    for g=1:nb_femto_BSs
-        if (femto_to_femto_pathloss(f,g) < reuse_min_pathloss)
-            nb_concurrent_users_per_femto(f) = nb_concurrent_users_per_femto(f) + nb_users_per_femto(g);
+    if nb_users_per_femto(f) == 0
+        femto_demand(f) = 0;
+    else
+        for g=1:nb_femto_BSs
+            if (femto_to_femto_pathloss(f,g) < reuse_min_pathloss)
+                nb_concurrent_users_per_femto(f) = nb_concurrent_users_per_femto(f) + nb_users_per_femto(g);
+            end
         end
+        if nb_concurrent_users_per_femto(f) == 0
+            nb_concurrent_users_per_femto(f) = nb_users_per_femto(f);
+        end
+        femto_demand(f) = ceil((nb_users_per_femto(f)/nb_concurrent_users_per_femto(f)).*nb_femto_RBs);
     end
 end
-
-% Take the total nb of available RBs for femto
-femto_demand = ceil((nb_users_per_femto./nb_concurrent_users_per_femto).*nb_femto_RBs);
 end
