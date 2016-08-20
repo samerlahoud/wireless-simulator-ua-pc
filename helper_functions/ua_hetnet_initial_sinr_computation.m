@@ -99,7 +99,7 @@ for u = 1:nb_users
             peak_rate(u,b) = peak_rate_range(peak_rate_round(1))*RB_bandwidth*sum(RB_allocation(b,:));
         else
             if sinr(u,b) < -20
-                    peak_rate(u,b) = 0;
+                peak_rate(u,b) = 0;
             else
                 peak_rate(u,b) = mmwave_bandwidth*log2(1+10^(sinr(u,b)/10));
             end
