@@ -47,7 +47,7 @@ end
 path_loss = alpha + 10*betta*log10(distance_UE_BS) + shadowing;
 
 %% testing
-% if distance_UE_BS > 200
-%     path_loss = 1e17;
-% end
+if distance_UE_BS > 200
+    path_loss = 1e17;
+end
 end
