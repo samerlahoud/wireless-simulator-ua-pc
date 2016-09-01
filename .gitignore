@@ -15,3 +15,5 @@ testing-collaboration-uestc_v6-v7
 drafts
 
 output
+
+*.DS_Store
