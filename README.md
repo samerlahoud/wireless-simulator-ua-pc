@@ -17,3 +17,7 @@ In order to remove FolderName from remote repository and keep the local version 
 	git push origin master
 
 A good tutorial from contributing to someone's repository is available [here](http://kbroman.org/github_tutorial/pages/fork.html).
+
+## Todo
+
+Evaluate SINR for simulated algorithms (RB allocation + user association)
