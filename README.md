@@ -21,3 +21,4 @@ A good tutorial from contributing to someone's repository is available [here](ht
 ## Todo
 
 Evaluate SINR for simulated algorithms (RB allocation + user association)
+Consider power base user association (replacing SINR based)

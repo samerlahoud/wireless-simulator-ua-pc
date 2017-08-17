@@ -103,7 +103,7 @@ errY = [std(cum_m1_macro_traffic),std(cum_m1_femto_traffic),std(cum_m1_mmwave_tr
 
 h = barwitherr(errY, y);% Plot with errorbars
 
-set(gca,'XTickLabel',{'BR+BR', 'BR+Optim', 'Random+SINR', 'Sep-ch+Femto-First', 'Co-ch+SINR'})
+set(gca,'XTickLabel',{'BR+BR', 'BR+Optim', 'Random+SINR', 'Sep-ch+SC-First', 'Co-ch+SINR'})
 legend('Macro','Femto','mmWave')
 ylabel('Percentage of traffic')
 set(h(1),'FaceColor','k');
@@ -113,28 +113,28 @@ savefig(sprintf('%s/rb-ua-traffic-perc%s.fig', output_dir, figure_file_name));
 
 f=figure;
 boxplot([cum_m1_macro_traffic, cum_m2_macro_traffic, cum_m3_macro_traffic, cum_m4_macro_traffic, cum_m5_macro_traffic],...
-    'notch', 'off', 'Label', {'BR+BR', 'BR+Optim', 'Random+SINR', 'Sep-ch+Femto-First', 'Co-ch+SINR'});
+    'notch', 'off', 'Label', {'BR+BR', 'BR+Optim', 'Random+SINR', 'Sep-ch+SC-First', 'Co-ch+SINR'});
 ylabel('Percentage of traffic on macro BSs');
 print(f,'-depsc', sprintf('%s/rb-ua-macro-traffic%s.eps', output_dir, figure_file_name));
 savefig(sprintf('%s/rb-ua-macro-traffic%s.fig', output_dir, figure_file_name));
 
 f=figure;
 boxplot([cum_m1_femto_traffic, cum_m2_femto_traffic, cum_m3_femto_traffic, cum_m4_femto_traffic, cum_m5_femto_traffic],...
-    'notch', 'off', 'Label', {'BR+BR', 'BR+Optim', 'Random+SINR', 'Sep-ch+Femto-First', 'Co-ch+SINR'});
+    'notch', 'off', 'Label', {'BR+BR', 'BR+Optim', 'Random+SINR', 'Sep-ch+SC-First', 'Co-ch+SINR'});
 ylabel('Percentage of traffic on femto BSs');
 print(f,'-depsc', sprintf('%s/rb-ua-femto-traffic%s.eps', output_dir, figure_file_name));
 savefig(sprintf('%s/rb-ua-femto-traffic%s.fig', output_dir, figure_file_name));
 
 f=figure;
 boxplot([cum_m1_mmwave_traffic, cum_m2_mmwave_traffic, cum_m3_mmwave_traffic, cum_m4_mmwave_traffic, cum_m5_mmwave_traffic],...
-    'notch', 'off', 'Label', {'BR+BR', 'BR+Optim', 'Random+SINR', 'Sep-ch+Femto-First', 'Co-ch+SINR'});
+    'notch', 'off', 'Label', {'BR+BR', 'BR+Optim', 'Random+SINR', 'Sep-ch+SC-First', 'Co-ch+SINR'});
 ylabel('Percentage of traffic on mmwave BSs');
 print(f,'-depsc', sprintf('%s/rb-ua-mmwave-traffic%s.eps', output_dir, figure_file_name));
 savefig(sprintf('%s/rb-ua-mmwave-traffic%s.fig', output_dir, figure_file_name));
 
 f=figure;
 boxplot([cum_m1_obj, cum_m2_obj, cum_m3_obj, cum_m4_obj, cum_m5_obj],...
-    'notch', 'off', 'Label', {'BR+BR', 'BR+Optim', 'Random+SINR', 'Sep-ch+Femto-First', 'Co-ch+SINR'});
+    'notch', 'off', 'Label', {'BR+BR', 'BR+Optim', 'Random+SINR', 'Sep-ch+SC-First', 'Co-ch+SINR'});
 ylabel('Objective');
 print(f,'-depsc', sprintf('%s/rb-ua-boxplot-objective%s.eps', output_dir, figure_file_name));
 savefig(sprintf('%s/rb-ua-boxplot-objective%s.fig', output_dir, figure_file_name));
@@ -159,7 +159,7 @@ title('Rate distribution');
 ylabel('CDF');
 xlabel('Rate (Mbits/s)');
 set(gca,'XScale','log');
-legend({'BR+BR', 'BR+Optim', 'Random+SINR', 'Sep-channel+Femto-First', 'Co-channel+SINR'}, 'Location', 'NorthWest');
+legend({'BR+BR', 'BR+Optim', 'Random+SINR', 'Sep-channel+SC-First', 'Co-channel+SINR'}, 'Location', 'NorthWest');
 hold off;
 print(f,'-depsc', sprintf('%s/rb-ua-cdf-rate%s.eps', output_dir, figure_file_name));
 savefig(sprintf('%s/rb-ua-cdf-rate%s.fig', output_dir, figure_file_name));

@@ -17,6 +17,7 @@ netconfig.rx_antenna_gain = 1;            % dBi "LTE, the UMTS long term evoluti
 netconfig.noise_density        = 10^(-20.4);
 %netconfig.thermal_noise_power = 1e-14;  % in Watt (-110dBm)
 netconfig.femto_first_sinr = -2;
+netconfig.small_cell_first_sinr = -2;
 netconfig.range_extension_bias = 5;
 netconfig.reuse_min_pathloss = 1e+13; % intial value 1e+13
 netconfig.user_distribution = 'normal'; % 'uniform' or 'normal'

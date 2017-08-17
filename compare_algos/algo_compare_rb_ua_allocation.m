@@ -25,10 +25,10 @@ m2_ua = optimal_pf_association_hetnet(m2_peak_rate);
 m3_ua = sinr_based_association_hetnet(m3_sinr);
 [m3_rate, m3_obj] = ua_hetnet_objective_computation(m3_peak_rate, m3_ua);
 
-% Sep-channel RB allocation + Femto-first UA
+% Sep-channel RB allocation + SC-First UA
 [m4_RB_allocation] = rb_allocation_sep_channel_reuse1_hetnet();
 [m4_peak_rate, m4_sinr] = ua_hetnet_initial_sinr_computation(pathloss, m4_RB_allocation);
-m4_ua = femto_first_association_hetnet(m4_sinr);
+m4_ua = small_cell_first_association_hetnet(m4_sinr);
 [m4_rate, m4_obj] = ua_hetnet_objective_computation(m4_peak_rate, m4_ua);
 
 % Co-channel RB allocation + SINR-based UA
