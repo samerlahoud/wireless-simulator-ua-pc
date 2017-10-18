@@ -1,9 +1,11 @@
-function [peak_rate, sinr] = ua_hetnet_initial_sinr_computation(pathloss, RB_allocation)
+function [peak_rate, sinr, rx_RB_power] = ua_hetnet_initial_sinr_computation(pathloss, RB_allocation)
 
 global netconfig;
 nb_BSs = netconfig.nb_BSs;
 nb_users = netconfig.nb_users;
 nb_RBs = netconfig.nb_RBs;
+nb_femto_RBs = netconfig.nb_femto_RBs;
+nb_macro_RBs = nb_RBs - nb_femto_RBs;
 nb_macro_BSs = netconfig.nb_macro_BSs;
 nb_femto_BSs = netconfig.nb_femto_BSs;
 nb_macro_femto_BSs = netconfig.nb_macro_femto_BSs;
@@ -21,8 +23,8 @@ noise_density = netconfig.noise_density;
 
 % Define BS transmit power per RB
 % Beware that there is no RB in mmwave
-tx_RB_power = [macro_tx_power*ones(1,nb_macro_BSs)./nb_RBs, ...
-            femto_tx_power*ones(1,nb_femto_BSs)./nb_RBs, ...
+tx_RB_power = [macro_tx_power*ones(1,nb_macro_BSs)./nb_macro_RBs, ...
+            femto_tx_power*ones(1,nb_femto_BSs)./nb_femto_RBs, ...
             mmwave_tx_power*ones(1,nb_mmwave_BSs)];
         
 % Received power and SINR matrices

@@ -8,8 +8,8 @@ nb_RBs = netconfig.nb_RBs;
 nb_macro_BSs = netconfig.nb_macro_BSs;
 nb_femto_BSs = netconfig.nb_femto_BSs;
 
-nb_macro_RBs = nb_RBs/2;
-nb_femto_RBs = nb_RBs/2;
+nb_femto_RBs = netconfig.nb_femto_RBs;
+nb_macro_RBs = nb_RBs - nb_femto_RBs;
 
 macro_RB_allocation = ones(nb_macro_BSs, nb_macro_RBs);
 femto_RB_allocation = zeros(nb_femto_BSs, nb_femto_RBs);
@@ -19,5 +19,5 @@ for f=1:nb_femto_BSs
     femto_RB_allocation(f,rand_RBs(1:femto_demand(f))) = 1;
 end
 
-RB_allocation = [macro_RB_allocation,zeros(nb_macro_BSs,nb_macro_RBs);zeros(nb_femto_BSs,nb_femto_RBs),femto_RB_allocation];
+RB_allocation = [macro_RB_allocation,zeros(nb_macro_BSs,nb_femto_RBs);zeros(nb_femto_BSs,nb_macro_RBs),femto_RB_allocation];
 end

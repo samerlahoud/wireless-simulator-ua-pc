@@ -11,9 +11,8 @@ RB_bandwidth = netconfig.RB_bandwidth;
 noise_density = netconfig.noise_density;
 femto_tx_power = netconfig.femto_tx_power;
 nb_macro_femto_BSs = netconfig.nb_macro_femto_BSs;
-
-nb_macro_RBs = nb_RBs/2;
-nb_femto_RBs = nb_RBs/2;
+nb_femto_RBs = netconfig.nb_femto_RBs;
+nb_macro_RBs = nb_RBs - nb_femto_RBs;
 scaling_constant = 1e16; % Numerical instability in CVX was 1e15 with 42 femtos
 
 femto_to_femto_pathloss = BS_to_BS_pathloss(nb_macro_BSs+1:nb_macro_femto_BSs,nb_macro_BSs+1:nb_macro_femto_BSs);
@@ -82,5 +81,5 @@ while(1)
         break
     end
 end
-RB_allocation = [macro_RB_allocation,zeros(nb_macro_BSs,nb_macro_RBs);zeros(nb_femto_BSs,nb_femto_RBs),femto_RB_allocation];
+RB_allocation = [macro_RB_allocation,zeros(nb_macro_BSs,nb_femto_RBs);zeros(nb_femto_BSs,nb_macro_RBs),femto_RB_allocation];
 end

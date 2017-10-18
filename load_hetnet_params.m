@@ -6,7 +6,8 @@ netconfig.gradient_convergence_eps = 1e-3; % 1e-3 for centralized 1e-6 for distr
 
 netconfig.nb_iterations = 5;
 netconfig.nb_users = 100;
-netconfig.nb_RBs = 100;
+netconfig.nb_RBs = 50;
+netconfig.nb_femto_RBs = 10;
 
 netconfig.RB_bandwidth = 180e3;         % Frequency in Hz
 netconfig.macro_tx_power = 10^(4.3-3);    % in Watt (43dBm)
@@ -19,7 +20,7 @@ netconfig.noise_density        = 10^(-20.4);
 netconfig.femto_first_sinr = -2;
 netconfig.small_cell_first_sinr = -2;
 netconfig.range_extension_bias = 5;
-netconfig.reuse_min_pathloss = 1e+13; % intial value 1e+13
+netconfig.reuse_min_pathloss = 1e+11; % intial value 1e+13
 netconfig.user_distribution = 'uniform'; % 'uniform' or 'normal'
 
 % mmwave params
