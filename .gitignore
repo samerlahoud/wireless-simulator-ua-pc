@@ -17,3 +17,5 @@ drafts
 output
 
 *.DS_Store
+
+*.mat

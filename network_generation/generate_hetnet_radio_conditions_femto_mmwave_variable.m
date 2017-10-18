@@ -15,7 +15,7 @@ mmwave_BS_percentage = netconfig.mmwave_BS_percentage;
 % urban_TS 36.942_antenna_2.14GHz_freq_plus_femtocells
 
 % v1 to v4 are candidates for different BS positions
-load('network_1_rings_femtocells-v4.mat');
+load('network_1_rings_femtocells-v6-250m-3femto.mat');
 
 % Get geographical area and BS carachteristics from pathloss map
 [x_range, y_range, nb_BSs] = size(networkPathlossMap.pathloss);

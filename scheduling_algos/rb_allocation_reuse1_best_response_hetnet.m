@@ -63,9 +63,8 @@ while(1)
         femto_RB_allocation(j,:) = per_femto_RB_allocation;
         objective_vector(j) = objective;
     end
-
     allocation_convergence = sum(sum(abs(femto_RB_allocation - previous_femto_RB_allocation)));
-    objective_convergence = sum(abs(((previous_objective_vector-objective_vector)>0)./(objective_vector)>0));
+    objective_convergence = sum(abs(((objective_vector-previous_objective_vector)>0)./(objective_vector)>0));
     
 %     figure; 
 %     data = femto_RB_allocation;
@@ -78,7 +77,8 @@ while(1)
     display(objective_convergence);
     nb_rounds = nb_rounds + 1;
     % This is very conservative, waiting to converge to the same allocation and a stable objective
-    if(previous_objective_convergence == objective_convergence) && (previous_allocation_convergence == allocation_convergence)
+    %if(previous_objective_convergence == objective_convergence) && (previous_allocation_convergence == allocation_convergence)
+    if (nb_rounds > 30) || (objective_convergence == 0) || (previous_objective_convergence == objective_convergence) && (previous_allocation_convergence == allocation_convergence)
         break
     end
 end
