@@ -6,8 +6,8 @@ netconfig.gradient_convergence_eps = 1e-3; % 1e-3 for centralized 1e-6 for distr
 
 netconfig.nb_iterations = 5;
 netconfig.nb_users = 100;
-netconfig.nb_RBs = 50;
-netconfig.nb_femto_RBs = 10;
+netconfig.nb_RBs = 100;
+%netconfig.nb_femto_RBs = 50;
 
 netconfig.RB_bandwidth = 180e3;         % Frequency in Hz
 netconfig.macro_tx_power = 10^(4.3-3);    % in Watt (43dBm)
@@ -18,9 +18,10 @@ netconfig.rx_antenna_gain = 1;            % dBi "LTE, the UMTS long term evoluti
 netconfig.noise_density        = 10^(-20.4);
 %netconfig.thermal_noise_power = 1e-14;  % in Watt (-110dBm)
 netconfig.femto_first_sinr = -2;
-netconfig.small_cell_first_sinr = -2;
+%netconfig.small_cell_first_sinr = -2; % not used, SC first is based on power
+netconfig.small_cell_first_power_ratio = 0.1;
 netconfig.range_extension_bias = 5;
-netconfig.reuse_min_pathloss = 1e+11; % intial value 1e+13
+netconfig.reuse_min_pathloss = 1e+10; % intial value 1e+13
 netconfig.user_distribution = 'uniform'; % 'uniform' or 'normal'
 
 % mmwave params

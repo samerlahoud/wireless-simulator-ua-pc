@@ -1,4 +1,4 @@
-function [BS_abs, BS_ord, user_abs, user_ord, pathloss, BS_to_BS_pathloss] ...
+function [BS_abs, BS_ord, user_abs, user_ord, pathloss, BS_to_BS_pathloss, rx_power] ...
     = generate_hetnet_radio_conditions_femto_mmwave_variable()
 % This is based on the Vienna LTE Simulator
 % Radio model includes shadowing and trisector antennas
@@ -8,8 +8,16 @@ rng('shuffle')
 % Get global configuration parameters
 global netconfig;
 nb_users = netconfig.nb_users;
+nb_RBs = netconfig.nb_RBs;
 user_distribution = netconfig.user_distribution;
 mmwave_BS_percentage = netconfig.mmwave_BS_percentage;
+macro_tx_power = netconfig.macro_tx_power;
+femto_tx_power = netconfig.femto_tx_power;
+mmwave_tx_power = netconfig.mmwave_tx_power;
+tx_antenna_gain = netconfig.tx_antenna_gain;
+rx_antenna_gain = netconfig.rx_antenna_gain;
+mmwave_tx_antenna_gain = netconfig.mmwave_tx_antenna_gain;
+mmwave_rx_antenna_gain = netconfig.mmwave_rx_antenna_gain;
 
 % Original file name is network_1_rings_3_sectors_30_offset_5m_res_TS36942_
 % urban_TS 36.942_antenna_2.14GHz_freq_plus_femtocells
@@ -120,4 +128,24 @@ for u = 1:nb_users
     end
 end
 
+%%
+% Define BS transmit power per RB
+% Beware that there is no RB in mmwave
+tx_RB_power = [macro_tx_power*ones(1,nb_macro_BSs)./nb_RBs, ...
+            femto_tx_power*ones(1,nb_femto_BSs)./nb_RBs, ...
+            mmwave_tx_power*ones(1,nb_mmwave_BSs)];
+
+% Received power and SINR matrices
+rx_power = zeros(nb_users,nb_BSs);
+
+% Check for penetration loss
+for u = 1:nb_users
+    for b = 1:nb_macro_femto_BSs
+        rx_power(u,b) = (tx_RB_power(b)*tx_antenna_gain*rx_antenna_gain)/pathloss(u,b);
+    end
+    for b = nb_macro_femto_BSs+1:nb_BSs
+        rx_power(u,b) = (tx_RB_power(b)*mmwave_tx_antenna_gain*mmwave_rx_antenna_gain)/pathloss(u,b);
+    end
+end
+%%
 end

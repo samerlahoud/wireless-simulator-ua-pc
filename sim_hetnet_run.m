@@ -7,7 +7,7 @@ nb_iterations = netconfig.nb_iterations;
 nb_users = netconfig.nb_users;
 nb_RBs = netconfig.nb_RBs;
 reuse_min_pathloss = netconfig.reuse_min_pathloss;
-nb_femto_RBs = netconfig.nb_femto_RBs;
+%nb_femto_RBs = netconfig.nb_femto_RBs;
 
 %% Compare UAs with BR RB allocation
 % for i = 1:nb_iterations
@@ -33,24 +33,24 @@ nb_femto_RBs = netconfig.nb_femto_RBs;
 % end
 
 %% Compare Selected RB allocation and UA
-% for i = 1:nb_iterations
-%     [BS_abs, BS_ord, user_abs, user_ord, pathloss, BS_to_BS_pathloss]=generate_hetnet_radio_conditions_femto_mmwave_variable;
-%     [femto_demand] = ua_femto_demand_computation(pathloss, BS_to_BS_pathloss, reuse_min_pathloss, nb_RBs/2);
-%     algo_compare_rb_ua_allocation(pathloss, BS_to_BS_pathloss, femto_demand, i);
-%     result_file_name = sprintf('./output/user-association-output/radio-conditions-%dusers-%drun.mat', nb_users, i);
-%     save(result_file_name, 'netconfig', 'BS_abs', 'BS_ord', 'user_abs', 'user_ord', ...
-%     'pathloss', 'BS_to_BS_pathloss', 'femto_demand');
-% end
-
-%% Use same radio conditions to compare clustering
 for i = 1:nb_iterations
-    load(sprintf('./output/user-association-output/radio-conditions-100users-%drun', i));
-    netconfig.reuse_min_pathloss = reuse_min_pathloss;
-    [femto_demand] = ua_femto_demand_computation(pathloss, BS_to_BS_pathloss, reuse_min_pathloss, nb_femto_RBs);
-    algo_compare_rb_ua_allocation(pathloss, BS_to_BS_pathloss, femto_demand, i);
+    [BS_abs, BS_ord, user_abs, user_ord, pathloss, BS_to_BS_pathloss, rx_power]=generate_hetnet_radio_conditions_femto_mmwave_variable;
+    [femto_demand] = ua_demand_computation(rx_power, BS_to_BS_pathloss, reuse_min_pathloss);
+    algo_compare_rb_ua_allocation(rx_power, BS_to_BS_pathloss, femto_demand, i);
     result_file_name = sprintf('./output/user-association-output/radio-conditions-%dusers-%drun.mat', nb_users, i);
     save(result_file_name, 'netconfig', 'BS_abs', 'BS_ord', 'user_abs', 'user_ord', ...
     'pathloss', 'BS_to_BS_pathloss', 'femto_demand');
 end
+
+%% Use same radio conditions to compare clustering
+% for i = 1:nb_iterations
+%     load(sprintf('./output/user-association-output/radio-conditions-100users-%drun', i));
+%     netconfig.reuse_min_pathloss = reuse_min_pathloss;
+%     [femto_demand] = ua_demand_computation(rx_power, BS_to_BS_pathloss, reuse_min_pathloss);
+%     algo_compare_rb_ua_allocation(rx_power, BS_to_BS_pathloss, femto_demand, i);
+%     result_file_name = sprintf('./output/user-association-output/radio-conditions-%dusers-%drun.mat', nb_users, i);
+%     save(result_file_name, 'netconfig', 'BS_abs', 'BS_ord', 'user_abs', 'user_ord', ...
+%     'pathloss', 'BS_to_BS_pathloss', 'femto_demand');
+% end
 
 %plot_user_association;
