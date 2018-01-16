@@ -27,10 +27,16 @@ m2_ua = optimal_pf_association_hetnet(m2_peak_rate);
 [m2_rate, m2_obj] = ua_hetnet_objective_computation(m2_peak_rate, m2_ua);
 
 % Random RB allocation + Power-based UA
-[m3_RB_allocation] = rb_allocation_reuse1_random_hetnet(femto_demand);
+% [m3_RB_allocation] = rb_allocation_reuse1_random_hetnet(femto_demand);
+% [m3_peak_rate, m3_sinr] = ua_hetnet_initial_sinr_computation(rx_power, m3_RB_allocation);
+% %m3_ua = sinr_based_association_hetnet(m3_sinr);
+% m3_ua = power_based_association_hetnet(m3_rx_RB_power);
+% [m3_rate, m3_obj] = ua_hetnet_objective_computation(m3_peak_rate, m3_ua);
+
+% Co-channel + peak-rate based UA
+[m3_RB_allocation] = rb_allocation_co_channel_reuse1_hetnet();
 [m3_peak_rate, m3_sinr] = ua_hetnet_initial_sinr_computation(rx_power, m3_RB_allocation);
-%m3_ua = sinr_based_association_hetnet(m3_sinr);
-m3_ua = power_based_association_hetnet(m3_rx_RB_power);
+m3_ua = peak_rate_based_association_hetnet(m3_peak_rate);
 [m3_rate, m3_obj] = ua_hetnet_objective_computation(m3_peak_rate, m3_ua);
 
 % Sep-channel RB allocation + SC-First UA
