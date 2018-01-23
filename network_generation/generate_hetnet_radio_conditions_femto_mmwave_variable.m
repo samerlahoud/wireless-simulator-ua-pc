@@ -22,8 +22,8 @@ mmwave_rx_antenna_gain = netconfig.mmwave_rx_antenna_gain;
 % Original file name is network_1_rings_3_sectors_30_offset_5m_res_TS36942_
 % urban_TS 36.942_antenna_2.14GHz_freq_plus_femtocells
 
-% v1 to v4 are candidates for different BS positions
-load('network_1_rings_femtocells-v6-250m-3femto.mat');
+% v1 to v4 are candidates for different BS positions, v5 and v6 for 250m
+load('network_1_rings_femtocells-v4.mat');
 
 % Get geographical area and BS carachteristics from pathloss map
 [x_range, y_range, nb_BSs] = size(networkPathlossMap.pathloss);

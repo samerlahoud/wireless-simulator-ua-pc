@@ -21,7 +21,7 @@ netconfig.femto_first_sinr = -2;
 %netconfig.small_cell_first_sinr = -2; % not used, SC first is based on power
 netconfig.small_cell_first_power_ratio = 0.1;
 netconfig.range_extension_bias = 5;
-netconfig.reuse_min_pathloss = 1e+13; % intial value 1e+13
+netconfig.reuse_min_pathloss = 1e+11; % range is [1e+10,1e+13], 1e+11 is a local max for BR
 netconfig.user_distribution = 'uniform'; % 'uniform' or 'normal'
 
 % mmwave params
@@ -29,4 +29,4 @@ netconfig.mmwave_tx_power = 1;    % in Watt (30dBm)
 netconfig.mmwave_bandwidth = 1e9; % 1 GHz
 netconfig.mmwave_tx_antenna_gain = 10^(15/10);   % 24 in dBi in Rappapport et al. 
 netconfig.mmwave_rx_antenna_gain = 1;
-netconfig.mmwave_BS_percentage = 0.25; %0.25
+netconfig.mmwave_BS_percentage = 0.15; %0.25
