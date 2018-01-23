@@ -21,7 +21,7 @@ netconfig.femto_first_sinr = -2;
 %netconfig.small_cell_first_sinr = -2; % not used, SC first is based on power
 netconfig.small_cell_first_power_ratio = 0.1;
 netconfig.range_extension_bias = 5;
-netconfig.reuse_min_pathloss = 1e+10; % intial value 1e+13
+netconfig.reuse_min_pathloss = 1e+13; % intial value 1e+13
 netconfig.user_distribution = 'uniform'; % 'uniform' or 'normal'
 
 % mmwave params
