@@ -16,62 +16,49 @@ cum_m1_ua = [];
 cum_m1_macro_traffic = [];
 cum_m1_femto_traffic = [];
 cum_m1_mmwave_traffic = [];
-cum_m1_jain_index = [];
 cum_m2_rate = [];
 cum_m2_obj = [];
 cum_m2_ua = [];
 cum_m2_macro_traffic = [];
 cum_m2_femto_traffic = [];
 cum_m2_mmwave_traffic = [];
-cum_m2_jain_index = [];
 cum_m3_rate = [];
 cum_m3_obj = [];
 cum_m3_ua = [];
 cum_m3_macro_traffic = [];
 cum_m3_femto_traffic = [];
 cum_m3_mmwave_traffic = [];
-cum_m3_jain_index = [];
 cum_m4_rate = [];
 cum_m4_obj = [];
 cum_m4_ua = [];
 cum_m4_macro_traffic = [];
 cum_m4_femto_traffic = [];
 cum_m4_mmwave_traffic = [];
-cum_m4_jain_index = [];
 cum_m5_rate = [];
 cum_m5_obj = [];
 cum_m5_ua = [];
 cum_m5_macro_traffic = [];
 cum_m5_femto_traffic = [];
 cum_m5_mmwave_traffic = [];
-cum_m5_jain_index = [];
 cum_m6_rate = [];
 cum_m6_obj = [];
 cum_m6_ua = [];
 cum_m6_macro_traffic = [];
 cum_m6_femto_traffic = [];
 cum_m6_mmwave_traffic = [];
-cum_m6_jain_index = [];
 
 cum_optimal_pf_sinr_rank = [];
 
 for i = 1:nb_iterations
     load(sprintf('%s/rb-ua-allocation-%dusers-%drun.mat', output_dir, nb_users, i));
     
-    m1_jain_index = ((sum(m1_rate))^2)/(nb_users*sum(m1_rate.^2));
-    m2_jain_index = ((sum(m2_rate))^2)/(nb_users*sum(m2_rate.^2));
-    m3_jain_index = ((sum(m3_rate))^2)/(nb_users*sum(m3_rate.^2));
-    m4_jain_index = ((sum(m4_rate))^2)/(nb_users*sum(m4_rate.^2));
-    m5_jain_index = ((sum(m5_rate))^2)/(nb_users*sum(m5_rate.^2));
-    m6_jain_index = ((sum(m6_rate))^2)/(nb_users*sum(m6_rate.^2));
-    
+    m1_jain_index = ((sum(m1_rate))^2)/(nb_users*sum(m1_rate.^2))
     cum_m1_rate = [cum_m1_rate; m1_rate];
     cum_m1_obj = [cum_m1_obj; m1_obj];
     cum_m1_ua = [cum_m1_ua; m1_ua];
     cum_m1_macro_traffic = [cum_m1_macro_traffic; sum(sum(m1_ua(:,1:nb_macro_BSs)))];
     cum_m1_femto_traffic = [cum_m1_femto_traffic; sum(sum(m1_ua(:,nb_macro_BSs+1:nb_macro_femto_BSs)))];
     cum_m1_mmwave_traffic = [cum_m1_mmwave_traffic; sum(sum(m1_ua(:,nb_macro_femto_BSs+1:nb_BSs)))];
-    cum_m1_jain_index = [cum_m1_jain_index; m1_jain_index];
     
     cum_m2_rate = [cum_m2_rate; m2_rate];
     cum_m2_obj = [cum_m2_obj; m2_obj];
@@ -79,7 +66,6 @@ for i = 1:nb_iterations
     cum_m2_macro_traffic = [cum_m2_macro_traffic; sum(sum(m2_ua(:,1:nb_macro_BSs)))];
     cum_m2_femto_traffic = [cum_m2_femto_traffic; sum(sum(m2_ua(:,nb_macro_BSs+1:nb_macro_femto_BSs)))];
     cum_m2_mmwave_traffic = [cum_m2_mmwave_traffic; sum(sum(m2_ua(:,nb_macro_femto_BSs+1:nb_BSs)))];
-    cum_m2_jain_index = [cum_m2_jain_index; m2_jain_index];
     
     cum_m3_rate = [cum_m3_rate; m3_rate];
     cum_m3_obj = [cum_m3_obj; m3_obj];
@@ -87,7 +73,6 @@ for i = 1:nb_iterations
     cum_m3_macro_traffic = [cum_m3_macro_traffic; sum(sum(m3_ua(:,1:nb_macro_BSs)))];
     cum_m3_femto_traffic = [cum_m3_femto_traffic; sum(sum(m3_ua(:,nb_macro_BSs+1:nb_macro_femto_BSs)))];
     cum_m3_mmwave_traffic = [cum_m3_mmwave_traffic; sum(sum(m3_ua(:,nb_macro_femto_BSs+1:nb_BSs)))];
-    cum_m3_jain_index = [cum_m3_jain_index; m3_jain_index];
     
     cum_m4_rate = [cum_m4_rate; m4_rate];
     cum_m4_obj = [cum_m4_obj; m4_obj];
@@ -95,7 +80,6 @@ for i = 1:nb_iterations
     cum_m4_macro_traffic = [cum_m4_macro_traffic; sum(sum(m4_ua(:,1:nb_macro_BSs)))];
     cum_m4_femto_traffic = [cum_m4_femto_traffic; sum(sum(m4_ua(:,nb_macro_BSs+1:nb_macro_femto_BSs)))];
     cum_m4_mmwave_traffic = [cum_m4_mmwave_traffic; sum(sum(m4_ua(:,nb_macro_femto_BSs+1:nb_BSs)))];
-    cum_m4_jain_index = [cum_m4_jain_index; m4_jain_index];
     
     cum_m5_rate = [cum_m5_rate; m5_rate];
     cum_m5_obj = [cum_m5_obj; m5_obj];
@@ -103,7 +87,6 @@ for i = 1:nb_iterations
     cum_m5_macro_traffic = [cum_m5_macro_traffic; sum(sum(m5_ua(:,1:nb_macro_BSs)))];
     cum_m5_femto_traffic = [cum_m5_femto_traffic; sum(sum(m5_ua(:,nb_macro_BSs+1:nb_macro_femto_BSs)))];
     cum_m5_mmwave_traffic = [cum_m5_mmwave_traffic; sum(sum(m5_ua(:,nb_macro_femto_BSs+1:nb_BSs)))];
-    cum_m5_jain_index = [cum_m5_jain_index; m5_jain_index];
     
     cum_m6_rate = [cum_m6_rate; m6_rate];
     cum_m6_obj = [cum_m6_obj; m6_obj];
@@ -111,7 +94,6 @@ for i = 1:nb_iterations
     cum_m6_macro_traffic = [cum_m6_macro_traffic; sum(sum(m6_ua(:,1:nb_macro_BSs)))];
     cum_m6_femto_traffic = [cum_m6_femto_traffic; sum(sum(m6_ua(:,nb_macro_BSs+1:nb_macro_femto_BSs)))];
     cum_m6_mmwave_traffic = [cum_m6_mmwave_traffic; sum(sum(m6_ua(:,nb_macro_femto_BSs+1:nb_BSs)))];
-    cum_m6_jain_index = [cum_m6_jain_index; m6_jain_index];
 end
 
 % Plot results
@@ -172,13 +154,6 @@ boxplot([cum_m1_obj, cum_m2_obj, cum_m3_obj, cum_m4_obj, cum_m5_obj, cum_m6_obj]
 ylabel('Objective');
 print(f,'-depsc', sprintf('%s/rb-ua-boxplot-objective%s.eps', output_dir, figure_file_name));
 savefig(sprintf('%s/rb-ua-boxplot-objective%s.fig', output_dir, figure_file_name));
-
-f=figure;
-boxplot([cum_m1_jain_index, cum_m2_jain_index, cum_m3_jain_index, cum_m4_jain_index, cum_m5_jain_index, cum_m6_jain_index],...
-    'notch', 'off', 'Label', {'BR+BR', 'BR+Optim', 'Co-ch+PR', 'Sep-ch+SC-First', 'Co-ch+Power', 'BR+Power'});
-ylabel('Jain index');
-print(f,'-depsc', sprintf('%s/rb-ua-jain-index%s.eps', output_dir, figure_file_name));
-savefig(sprintf('%s/rb-ua-jain-index%s.fig', output_dir, figure_file_name));
 
 f=figure; 
 %h=cdfplot(cum_m4_rate/(nb_RBs*1e6/5));
