@@ -4,7 +4,7 @@ netconfig.debug_level = 1;         % Debug options  0=no output 1=basic output 2
 netconfig.gradient_step = 0.01; % step is usually 0.001 as for distributed BR (overloaded in the corresponding function)
 netconfig.gradient_convergence_eps = 1e-3; % 1e-3 for centralized 1e-6 for distributed BR
 
-netconfig.nb_iterations = 5;
+netconfig.nb_iterations = 20;
 netconfig.nb_users = 100;
 netconfig.nb_RBs = 100;
 %netconfig.nb_femto_RBs = 50;

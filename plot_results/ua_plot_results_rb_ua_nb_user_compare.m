@@ -1,4 +1,4 @@
-function ua_plot_results_rb_ua_scenario_compare
+function ua_plot_results_rb_ua_nb_user_compare
 global netconfig;
 nb_iterations = netconfig.nb_iterations;
 nb_users = netconfig.nb_users;
@@ -93,9 +93,10 @@ cum_m62_femto_traffic = [];
 cum_m62_mmwave_traffic = [];
 cum_m62_jain_index = [];
 
+nb_users = 300;
 for i = 1:nb_iterations
-    load(sprintf('%s/rb-ua-100users-cluster-0.15-110dB/radio-conditions-%dusers-%drun.mat', output_dir, nb_users, i));
-    load(sprintf('%s/rb-ua-100users-cluster-0.15-110dB/rb-ua-allocation-%dusers-%drun.mat', output_dir, nb_users, i));
+    load(sprintf('%s/rb-ua-300users-uniform-0.15-110dB/radio-conditions-%dusers-%drun.mat', output_dir, nb_users, i));
+    load(sprintf('%s/rb-ua-300users-uniform-0.15-110dB/rb-ua-allocation-%dusers-%drun.mat', output_dir, nb_users, i));
     
     nb_BSs = netconfig.nb_BSs;
     nb_macro_BSs = netconfig.nb_macro_BSs;
@@ -158,6 +159,7 @@ for i = 1:nb_iterations
 
 end
 
+nb_users = 100;
 for i = 1:nb_iterations
     load(sprintf('%s/rb-ua-100users-uniform-0.15-110dB/radio-conditions-%dusers-%drun.mat', output_dir, nb_users, i));
     load(sprintf('%s/rb-ua-100users-uniform-0.15-110dB/rb-ua-allocation-%dusers-%drun.mat', output_dir, nb_users, i));
@@ -224,7 +226,7 @@ for i = 1:nb_iterations
 end
 
 % Plot results
-figure_file_name = sprintf('-%dusers',nb_users);
+figure_file_name = 'nb_users';
 
 f=figure;
 
@@ -234,7 +236,7 @@ y = [mean(cum_m11_macro_traffic),mean(cum_m11_femto_traffic),mean(cum_m11_mmwave
     mean(cum_m32_macro_traffic),mean(cum_m32_femto_traffic),mean(cum_m32_mmwave_traffic); ...
     mean(cum_m51_macro_traffic),mean(cum_m51_femto_traffic),mean(cum_m51_mmwave_traffic); ...
     mean(cum_m52_macro_traffic),mean(cum_m52_femto_traffic),mean(cum_m52_mmwave_traffic)]...
-    *(100./nb_users);
+    .*[1/3,1/3,1/3;1,1,1;1/3,1/3,1/3;1,1,1;1/3,1/3,1/3;1,1,1];
 
 errY = [std(cum_m11_macro_traffic),std(cum_m11_femto_traffic),std(cum_m11_mmwave_traffic); ...
     std(cum_m12_macro_traffic),std(cum_m12_femto_traffic),std(cum_m12_mmwave_traffic); ...
@@ -242,7 +244,7 @@ errY = [std(cum_m11_macro_traffic),std(cum_m11_femto_traffic),std(cum_m11_mmwave
     std(cum_m32_macro_traffic),std(cum_m32_femto_traffic),std(cum_m32_mmwave_traffic); ...
     std(cum_m51_macro_traffic),std(cum_m51_femto_traffic),std(cum_m51_mmwave_traffic); ...
     std(cum_m52_macro_traffic),std(cum_m52_femto_traffic),std(cum_m52_mmwave_traffic);] ...
-    *(100./nb_users);
+    .*[1/3,1/3,1/3;1,1,1;1/3,1/3,1/3;1,1,1;1/3,1/3,1/3;1,1,1];
 
 h = barwitherr(errY, y);% Plot with errorbars
 

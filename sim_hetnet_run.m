@@ -33,7 +33,7 @@ reuse_min_pathloss = netconfig.reuse_min_pathloss;
 % end
 
 %% Compare Selected RB allocation and UA
-for i = 1:nb_iterations
+for i = 6:nb_iterations
     [BS_abs, BS_ord, user_abs, user_ord, pathloss, BS_to_BS_pathloss, rx_power]=generate_hetnet_radio_conditions_femto_mmwave_variable;
     [femto_demand] = ua_demand_computation(rx_power, BS_to_BS_pathloss, reuse_min_pathloss);
     algo_compare_rb_ua_allocation(rx_power, BS_to_BS_pathloss, femto_demand, i);
