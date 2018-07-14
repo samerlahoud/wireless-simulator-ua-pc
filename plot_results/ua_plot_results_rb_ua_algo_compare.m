@@ -154,7 +154,6 @@ h = bar(y,'stacked');
 set(gca,'XTickLabel',{'BR-SA + BR-UA', 'BR-SA + Cent-UA', 'CoCh-SA + PR-UA', 'SepCh-SA + SCFirst-UA', 'CoCh-SA + Pow-UA', 'BR-SA + Pow-UA'})
 legend('Macro','Femto','mmWave')
 ylabel('Percentage of users')
-set(h(1),'FaceColor','k');
 set(gca,'XTickLabelRotation',90);
 ylim([0 110])
 ax = gca;
@@ -215,13 +214,13 @@ set(h,'LineWidth',2,'LineStyle', '-')
 h=cdfplot(cum_m3_rate/1e6);
 %set(h,'color','b','LineWidth',2)
 set(h,'LineWidth',2,'LineStyle', '--')
-h=cdfplot(cum_m4_rate(cum_m4_rate>0)/1e6);
+h=cdfplot(cum_m4_rate/1e6);
 %set(h,'color','g','LineWidth',2)
 set(h,'LineWidth',2,'LineStyle', '--')
-h=cdfplot(cum_m5_rate(cum_m5_rate>0)/1e6);
+h=cdfplot(cum_m5_rate/1e6);
 %set(h,'color','k','LineWidth',2)
 set(h,'LineWidth',2,'LineStyle', ':')
-h=cdfplot(cum_m6_rate(cum_m6_rate>0)/1e6);
+h=cdfplot(cum_m6_rate/1e6);
 %set(h,'color','y','LineWidth',2)
 set(h,'LineWidth',2,'LineStyle', ':')
 title('');
