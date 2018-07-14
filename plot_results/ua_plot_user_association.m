@@ -94,3 +94,16 @@ for u = 1:nb_users
 end
 %print -deps -color test.eps
 hold off
+
+f=figure(6);
+voronoi(macro_BS_abs, macro_BS_ord,'k');
+hold on
+plot(macro_BS_abs,macro_BS_ord,'b^','MarkerFaceColor','b','MarkerSize',8);
+plot(femto_BS_abs,femto_BS_ord,'r^','MarkerFaceColor','r');
+plot(mmwave_BS_abs,mmwave_BS_ord,'g^','MarkerFaceColor','g');
+plot(user_abs, user_ord, 'x');
+print(f,'-depsc', './output/hetnetwork.eps');
+savefig('./output/hetnetwork.fig');
+matlab2tikz('./output/hetnetwork.tex','showInfo', false, ...
+        'parseStrings',false,'standalone', false, ...
+        'height', '\figureheight', 'width','\figurewidth');
