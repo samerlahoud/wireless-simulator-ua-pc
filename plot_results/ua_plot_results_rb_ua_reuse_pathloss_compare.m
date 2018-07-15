@@ -1,4 +1,5 @@
-function ua_plot_results_rb_reuse_pathloss_compare
+function ua_plot_results_rb_ua_reuse_pathloss_compare
+% This generates all plots but for two out of three pathloss thresholds
 global netconfig;
 nb_iterations = netconfig.nb_iterations;
 nb_users = netconfig.nb_users;

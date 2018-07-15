@@ -1,4 +1,4 @@
-function ua_plot_results_rb_mm_wave_perc_compare
+function ua_plot_results_rb_ua_mm_wave_perc_compare
 global netconfig;
 nb_iterations = netconfig.nb_iterations;
 nb_users = netconfig.nb_users;
@@ -392,8 +392,8 @@ ax = gca;
 ax.YGrid = 'on';
 ylabel('Rate (Mbit/s)');
 set(gca,'YScale','log')
-print(f,'-depsc', sprintf('%s//mmwave-density-compare/rb-ua-boxplot-rate%s.eps', output_dir, figure_file_name));
-savefig(sprintf('%s//mmwave-density-compare/rb-ua-boxplot-rate%s.fig', output_dir, figure_file_name));
+print(f,'-depsc', sprintf('%s/mmwave-density-compare/rb-ua-boxplot-rate%s.eps', output_dir, figure_file_name));
+savefig(sprintf('%s/mmwave-density-compare/rb-ua-boxplot-rate%s.fig', output_dir, figure_file_name));
 
 % f=figure; 
 % h=cdfplot(cum_m11_rate/1e6);

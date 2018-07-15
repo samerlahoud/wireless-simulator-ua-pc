@@ -1,4 +1,5 @@
-function ua_plot_results_rb_reuse_pathloss_cdf_rate
+function ua_plot_results_rb_ua_reuse_pathloss_cdf_rate
+% This generates only rate cdf but for all three pathloss thresholds
 global netconfig;
 nb_iterations = netconfig.nb_iterations;
 nb_users = netconfig.nb_users;
@@ -167,20 +168,19 @@ for i = 1:nb_iterations
     cum_m13_rate = [cum_m13_rate; femto_user_rate];
 end
 
-
 f=figure; 
 h=cdfplot(cum_m11_rate/1e6);
-set(h,'color','c','LineWidth',2)
+set(h,'LineWidth',2,'LineStyle', '--')
 hold on;
 h=cdfplot(cum_m12_rate/1e6);
-set(h,'color','r','LineWidth',2)
+set(h,'LineWidth',2,'LineStyle', '-')
 h=cdfplot(cum_m13_rate/1e6);
-set(h,'color','b','LineWidth',2)
-title('Rate distribution');
+set(h,'LineWidth',2,'LineStyle', ':')
+title('');
 ylabel('CDF');
-xlabel('Rate (Mbits/s)');
+xlabel('Rate (Mbit/s)');
 set(gca,'XScale','log');
-legend({'BR+BR+120', 'BR+BR+110', 'BR+BR-100'}, 'Location', 'NorthWest');
+legend({'BR-SA + BR-UA (120 dB)', 'BR-SA + BR-UA (110 dB)', 'BR-SA + BR-UA (100 dB)'}, 'Location', 'NorthWest');
 hold off;
-print(f,'-depsc', sprintf('%s/rb-ua-cdf-rate%s.eps', output_dir, figure_file_name));
-savefig(sprintf('%s/rb-ua-cdf-rate%s.fig', output_dir, figure_file_name));
+print(f,'-depsc', sprintf('%s/reuse-pathloss-compare/rb-ua-cdf-rate%s.eps', output_dir, figure_file_name));
+savefig(sprintf('%s/reuse-pathloss-compare/rb-ua-cdf-rate%s.fig', output_dir, figure_file_name));
