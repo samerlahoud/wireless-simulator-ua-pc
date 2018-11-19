@@ -90,7 +90,7 @@ end
 % Transformed to output of Vienna simulator, adding only fictive high SINR 1000
 %load('SNR_to_throughput_mod_mapping.mat');
 % Testing with MIMO
-load('SNR_to_throughput_mod_mimo_mapping.mat');
+load('SNR_to_throughput_mod_mimo_44_mapping.mat');
 
 % Check for nb_RBs according to freq allocation
 peak_rate = zeros(nb_users,nb_BSs);
