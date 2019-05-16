@@ -1,4 +1,4 @@
-function [peak_rate, sinr_RB] = ua_hetnet_initial_sinr_computation(rx_power, RB_allocation)
+function [peak_rate, sinr] = ua_hetnet_initial_sinr_computation(rx_power, RB_allocation)
 
 global netconfig;
 nb_BSs = netconfig.nb_BSs;
@@ -43,7 +43,6 @@ noise_density = netconfig.noise_density;
 %rx_power = zeros(nb_users,nb_BSs);
 sinr_RB = zeros(nb_users,nb_macro_femto_BSs,nb_RBs);
 peak_rate_RB = zeros(nb_users,nb_BSs,nb_RBs);
-peak_rate = zeros(nb_users,nb_BSs);
 
 % SINR peak rate equivalence map is given per Hz
 % http://www.etsi.org/deliver/etsi_tr/136900_136999/136942/08.01.00_60/tr_136942v080100p.pdf
@@ -70,25 +69,77 @@ for u = 1:nb_users
                 peak_rate_RB(u,b,k) = 0;
                 continue;
             end
-            peak_rate_RB(u,b,k) = peak_rate_range(peak_rate_round(1))*RB_bandwidth;
+            peak_rate_RB(u,b,k) = peak_rate_range(peak_rate_round(1))*RB_bandwidth);
         end
-        peak_rate(u,b) = sum(peak_rate(u,b,:)); 
+        peak_rate
     end
 end
+
+% Compute SINR for user u on RB k of BS b
+sinr = zeros(nb_users,nb_BSs,nb_RBs);
+% SINR equals -Inf when femto demand is zero
+for u = 1:nb_users
+    for b = 1:nb_macro_femto_BSs
+        for 
+        if(sum(RB_allocation(b,:)) == 0)
+            sinr(u,b) = -Inf;
+            continue;
+        end
+        tmp_sinr_real = 0;
+        % Iterate over allocated RB on BS b
+        for k = find(RB_allocation(b,:)==1)
+            tmp_sinr_real = tmp_sinr_real + sinr_RB(u,b,k);
+        end
+        % This is arithmectic mean (should we go for geometric?)
+        tmp_sinr_real = tmp_sinr_real/sum(RB_allocation(b,:));
+        sinr(u,b) = 10*log10(tmp_sinr_real);
+    end
+end
+
 
 for u = 1:nb_users
     % Reuse 1 model for mmwave
     for b = nb_macro_femto_BSs+1:nb_BSs
         mmwave_interf = sum(rx_power(u,nb_macro_femto_BSs+1:nb_BSs))-rx_power(u,b);
-        tmp_sinr_mmwave = 10*log10(rx_power(u,b)/(noise_density*mmwave_bandwidth + mmwave_interf));
-        sinr_RB(u,b,:) = tmp_sinr_mmwave;
-        if tmp_sinr_mmwave < -20
+        sinr(u,b) = 10*log10(rx_power(u,b)/(noise_density*mmwave_bandwidth + mmwave_interf));
+        if sinr(u,b) < -20
             peak_rate(u,b) = 0;
         else
-            peak_rate(u,b) = mmwave_bandwidth*log2(1+10^(tmp_sinr_mmwave/10));
+            peak_rate(u,b) = mmwave_bandwidth*log2(1+10^(sinr(u,b)/10));
+        end
+    end
+end
+
+
+% Check for nb_RBs according to freq allocation
+%peak_rate = zeros(nb_users,nb_BSs);
+for u = 1:nb_users 
+    for b = 1:nb_BSs
+        peak_rate_round = find(sinr(u,b)<sinr_range);
+        if isempty(peak_rate_round)
+            peak_rate(u,b) = 0;
+            continue;
+        end
+        if b <= nb_macro_femto_BSs
+            peak_rate(u,b) = peak_rate_range(peak_rate_round(1))*RB_bandwidth*sum(RB_allocation(b,:));
         end
     end
 end
 
 end
+
+% Replace discrete mapping by Shannon formula
+% for u = 1:nb_users
+%     for b = 1:nb_BSs
+%         if sinr(u,b) < -20
+%             peak_rate(u,b) = 0;
+%         else
+%             if b <= nb_macro_femto_BSs
+%                 peak_rate(u,b) = RB_bandwidth*sum(RB_allocation(b,:))*log2(1+10^(sinr(u,b)/10));
+%             else
+%                 peak_rate(u,b) = mmwave_bandwidth*log2(1+10^(sinr(u,b)/10));
+%             end
+%         end
+%     end
+% end
 
