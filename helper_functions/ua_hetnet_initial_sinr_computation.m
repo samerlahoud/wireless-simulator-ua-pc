@@ -63,8 +63,8 @@ for u = 1:nb_users
         % Iterate over allocated RB on BS b
         for k = find(RB_allocation(b,:)==1)
             interf = sum(rx_power(u,RB_allocation(:,k)==1))-rx_power(u,b);
-            sinr_RB(u,b,k) = rx_power(u,b)/(noise_density*RB_bandwidth + interf);
-            sinr_RB(u,b,k) = 10*log10(sinr_RB);
+            real_sinr = rx_power(u,b)/(noise_density*RB_bandwidth + interf);
+            sinr_RB(u,b,k) = 10*log10(real_sinr);
             peak_rate_round = find(sinr_RB(u,b,k)<sinr_range);
             if isempty(peak_rate_round)
                 peak_rate_RB(u,b,k) = 0;
