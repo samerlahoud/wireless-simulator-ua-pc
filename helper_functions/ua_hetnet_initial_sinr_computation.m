@@ -78,6 +78,7 @@ end
 
 for u = 1:nb_users
     % Reuse 1 model for mmwave
+    % Adding MU-MIMO
     for b = nb_macro_femto_BSs+1:nb_BSs
         mmwave_interf = sum(rx_power(u,nb_macro_femto_BSs+1:nb_BSs))-rx_power(u,b);
         tmp_sinr_mmwave = 10*log10(rx_power(u,b)/(noise_density*mmwave_bandwidth + mmwave_interf));
