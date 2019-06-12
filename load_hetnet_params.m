@@ -4,7 +4,7 @@ netconfig.debug_level = 1;         % Debug options  0=no output 1=basic output 2
 netconfig.gradient_step = 0.01; % step is usually 0.001 as for distributed BR (overloaded in the corresponding function)
 netconfig.gradient_convergence_eps = 1e-3; % 1e-3 for centralized 1e-6 for distributed BR
 
-netconfig.nb_iterations = 10;
+netconfig.nb_iterations = 20;
 netconfig.nb_users = 100;
 netconfig.nb_RBs = 100;
 %netconfig.nb_femto_RBs = 50;
@@ -21,7 +21,7 @@ netconfig.femto_first_sinr = -2;
 %netconfig.small_cell_first_sinr = -2; % not used, SC first is based on power
 netconfig.small_cell_first_power_ratio = 0.1;
 netconfig.range_extension_bias = 5;
-netconfig.reuse_min_pathloss = 1e+12; % range is [1e+10,1e+13], 1e+11 is a local max for BR
+netconfig.reuse_min_pathloss = 1e+11; % range is [1e+10,1e+13], 1e+11 is a local max for BR
 netconfig.user_distribution = 'uniform'; % 'uniform' or 'normal'
 
 % mmwave params
