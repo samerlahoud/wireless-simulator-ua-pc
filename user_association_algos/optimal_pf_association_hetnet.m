@@ -3,6 +3,8 @@ function [user_association] = optimal_pf_association_hetnet(peak_rate)
 global netconfig;
 nb_users = netconfig.nb_users;
 nb_BSs = netconfig.nb_BSs;
+nb_macro_femto_BSs = netconfig.nb_macro_femto_BSs;
+mmwave_prefix_load = netconfig.mmwave_prefix_load;
 
 % Geometric programming formulation of the problem
 cvx_begin
@@ -22,7 +24,7 @@ for u = 1:nb_users
     end
 end
 
-for b = 1:nb_BSs
+for b = 1:nb_macro_femto_BSs
     nb_users_per_BS(b) = sum(theta(:,b));
 end
 
@@ -35,6 +37,10 @@ subject to
 for u = 1:nb_users
     sum(theta(u,:)) <= 1;
 end
+for b = nb_macro_femto_BSs+1:nb_BSs
+    sum(theta(:,b)) <= mmwave_prefix_load;
+end
+    
 % Adding BS occupancy constraint
 % for b = 1:nb_BSs
 %     sum(theta(:,b)) <= 1;
