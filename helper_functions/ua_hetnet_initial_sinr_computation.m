@@ -9,6 +9,9 @@ nb_macro_femto_BSs = netconfig.nb_macro_femto_BSs;
 RB_bandwidth = netconfig.RB_bandwidth;
 mmwave_bandwidth = netconfig.mmwave_bandwidth;
 noise_density = netconfig.noise_density;
+mmwave_nb_tx_antenna = netconfig.mmwave_nb_tx_antenna;
+mmwave_prefix_load = netconfig.mmwave_prefix_load;
+mmwave_tdd_constant = netconfig.mmwave_tdd_constant;
 
 % Define BS transmit power per RB
 % Beware that there is no RB in mmwave
@@ -81,12 +84,13 @@ for u = 1:nb_users
     % Adding MU-MIMO
     for b = nb_macro_femto_BSs+1:nb_BSs
         mmwave_interf = sum(rx_power(u,nb_macro_femto_BSs+1:nb_BSs))-rx_power(u,b);
-        tmp_sinr_mmwave = 10*log10(rx_power(u,b)/(noise_density*mmwave_bandwidth + mmwave_interf));
+        mu_mimo_factor = (mmwave_nb_tx_antenna-mmwave_prefix_load+1)/mmwave_prefix_load; 
+        tmp_sinr_mmwave = 10*log10(mu_mimo_factor*rx_power(u,b)/(noise_density*mmwave_bandwidth + mmwave_interf));
         sinr_RB(u,b,:) = tmp_sinr_mmwave;
         if tmp_sinr_mmwave < -20
             peak_rate(u,b) = 0;
         else
-            peak_rate(u,b) = mmwave_bandwidth*log2(1+10^(tmp_sinr_mmwave/10));
+            peak_rate(u,b) = mmwave_tdd_constant*mmwave_bandwidth*log2(1+10^(tmp_sinr_mmwave/10));
         end
     end
 end

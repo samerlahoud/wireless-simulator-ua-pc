@@ -29,4 +29,7 @@ netconfig.mmwave_tx_power = 1;    % in Watt (30dBm)
 netconfig.mmwave_bandwidth = 1e9; % 1 GHz
 netconfig.mmwave_tx_antenna_gain = 10^(15/10);   % 24 in dBi in Rappapport et al. 
 netconfig.mmwave_rx_antenna_gain = 1;
+netconfig.mmwave_nb_tx_antenna = 100; % Number of mmWave antennaes for MU-MIMO
+netconfig.mmwave_prefix_load = 20; % Prefixed load parameter
+netconfig.mmwave_tdd_constant = 0.45; % Xi(1-Tp/Tc) with Xi = 0.5, Tp = 20, Tc = 200
 netconfig.mmwave_BS_percentage = 0.15; %0.25
