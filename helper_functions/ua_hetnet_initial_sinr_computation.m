@@ -67,12 +67,13 @@ for u = 1:nb_users
             sinr_RB(u,b,k) = 10*log10(real_sinr);
             peak_rate_round = find(sinr_RB(u,b,k)<sinr_range);
             if isempty(peak_rate_round)
+                % No need for this condition
                 peak_rate_RB(u,b,k) = 0;
                 continue;
             end
             peak_rate_RB(u,b,k) = peak_rate_range(peak_rate_round(1))*RB_bandwidth;
         end
-        peak_rate(u,b) = sum(peak_rate(u,b,:)); 
+        peak_rate(u,b) = sum(peak_rate_RB(u,b,:)); 
     end
 end
 
