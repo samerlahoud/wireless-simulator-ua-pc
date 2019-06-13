@@ -75,7 +75,7 @@ for u = 1:nb_users
             end
             peak_rate_RB(u,b,k) = peak_rate_range(peak_rate_round(1))*RB_bandwidth;
         end
-        peak_rate(u,b) = sum(peak_rate(u,b,:)); 
+        peak_rate(u,b) = sum(peak_rate_RB(u,b,:)); 
     end
 end
 
