@@ -154,8 +154,8 @@ for i = 1:nb_iterations
 end
 
 for i = 1:nb_iterations
-    load(sprintf('%s/rb-ua-100users-uniform-0.15-110dB-mimo/radio-conditions-%dusers-%drun.mat', output_dir, nb_users, i));
-    load(sprintf('%s/rb-ua-100users-uniform-0.15-110dB-mimo/rb-ua-allocation-%dusers-%drun.mat', output_dir, nb_users, i));
+    load(sprintf('%s/rb-ua-100users-uniform-0.15-mu-mimo-110dB/radio-conditions-%dusers-%drun.mat', output_dir, nb_users, i));
+    load(sprintf('%s/rb-ua-100users-uniform-0.15-mu-mimo-110dB/rb-ua-allocation-%dusers-%drun.mat', output_dir, nb_users, i));
     
     nb_BSs = netconfig.nb_BSs;
     nb_macro_BSs = netconfig.nb_macro_BSs;
@@ -191,38 +191,38 @@ y = [mean(cum_m11_macro_traffic),mean(cum_m11_femto_traffic),mean(cum_m11_mmwave
 
 h = bar(y,'stacked');
 
-set(gca,'XTickLabel',{'BR-SA + Cent-UA', 'BR-SA + Cent-UA (MIMO)'})
+set(gca,'XTickLabel',{'BR-SA + Cent-UA', 'BR-SA + Cent-UA (MU-MIMO)'})
 legend('Macro','Femto','mmWave','Location', 'NorthWest')
 ylabel('Percentage of users')
 set(gca,'XTickLabelRotation',90);
 ylim([0 110])
 ax = gca;
 ax.YGrid = 'on';
-print(f,'-depsc', sprintf('%s/rb-ua-traffic-perc%s.eps', output_dir, figure_file_name));
-savefig(sprintf('%s/rb-ua-traffic-perc%s.fig', output_dir, figure_file_name));
+print(f,'-depsc', sprintf('%s/mu-mimo-compare/rb-ua-traffic-perc%s.eps', output_dir, figure_file_name));
+savefig(sprintf('%s/mu-mimo-compare/rb-ua-traffic-perc%s.fig', output_dir, figure_file_name));
  
 f=figure;
 boxplot([cum_m11_obj, cum_m12_obj],...
     'notch', 'off', 'Label', ...
-    {'BR-SA + Cent-UA', 'BR-SA + Cent-UA (MIMO)'});
+    {'BR-SA + Cent-UA', 'BR-SA + Cent-UA (MU-MIMO)'});
 ylabel('Objective');
 set(gca,'XTickLabelRotation',90);
 ax = gca;
 ax.YGrid = 'on';
-print(f,'-depsc', sprintf('%s/rb-ua-boxplot-objective%s.eps', output_dir, figure_file_name));
-savefig(sprintf('%s/rb-ua-boxplot-objective%s.fig', output_dir, figure_file_name));
+print(f,'-depsc', sprintf('%s/mu-mimo-compare/rb-ua-boxplot-objective%s.eps', output_dir, figure_file_name));
+savefig(sprintf('%s/mu-mimo-compare/rb-ua-boxplot-objective%s.fig', output_dir, figure_file_name));
 
 f=figure;
 boxplot([cum_m11_rate, cum_m12_rate]./1e6,...
     'Whisker',100, 'Label', ...
-    {'BR-SA + Cent-UA', 'BR-SA + Cent-UA (MIMO)'});
+    {'BR-SA + Cent-UA', 'BR-SA + Cent-UA (MU-MIMO)'});
 set(gca,'XTickLabelRotation',90);
 ax = gca;
 ax.YGrid = 'on';
 ylabel('Rate (Mbit/s)');
 set(gca,'YScale','log')
-print(f,'-depsc', sprintf('%s/rb-ua-boxplot-rate%s.eps', output_dir, figure_file_name));
-savefig(sprintf('%s/rb-ua-boxplot-rate%s.fig', output_dir, figure_file_name));
+print(f,'-depsc', sprintf('%s/mu-mimo-compare/rb-ua-boxplot-rate%s.eps', output_dir, figure_file_name));
+savefig(sprintf('%s/mu-mimo-compare/rb-ua-boxplot-rate%s.fig', output_dir, figure_file_name));
 
 % f=figure; 
 % h=cdfplot(cum_m11_rate/1e6);
