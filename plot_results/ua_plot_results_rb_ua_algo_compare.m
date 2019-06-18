@@ -227,7 +227,7 @@ title('');
 ylabel('CDF');
 xlabel('Rate (Mbit/s)');
 set(gca,'XScale','log');
-legend({'BR-SA + BR-UA', 'BR-SA + Cent-UA', 'CoCh-SA + PR-UA', 'SepCh-SA + SCFirst-UA', 'CoCh-SA + Pow-UA', 'BR-SA + Pow-UA'}, 'Location', 'NorthWest');
+legend({'BR-SA + BR-UA', 'BR-SA + Cent-UA', 'CoCh-SA + PR-UA', 'SepCh-SA + SCFirst-UA', 'CoCh-SA + Pow-UA', 'BR-SA + Pow-UA'}, 'Location', 'NorthEast');
 hold off;
 print(f,'-depsc', sprintf('%s/rb-ua-cdf-rate%s.eps', output_dir, figure_file_name));
 savefig(sprintf('%s/rb-ua-cdf-rate%s.fig', output_dir, figure_file_name));

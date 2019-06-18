@@ -39,7 +39,7 @@ h2 = histcounts(cum_femto_size(2,:),edges)./(nb_iterations);
 h3 = histcounts(cum_femto_size(3,:),edges)./(nb_iterations);
 
 bar(edges(1:end-1),[h1; h2; h3]');
-legend('100 dB', '110 dB', '120 dB');
+legend('-100 dB', '-110 dB', '-120 dB');
 
 %boxplot(cum_femto_size','notch', 'off', 'Label', {'100 dB', '110 dB', '120 dB'});
 ylabel('Average number of clusters');
@@ -48,7 +48,7 @@ print(f,'-depsc', sprintf('%s/femto-demand-compare/rb-ua-femto-size%s.eps', outp
 savefig(sprintf('%s/femto-demand-compare/rb-ua-femto-size%s.fig', output_dir, figure_file_name));
 
 % f=figure;
-% boxplot(cum_femto_demand','notch', 'off', 'Label', {'100 dB', '110 dB', '120 dB'});
+% boxplot(cum_femto_demand','notch', 'off', 'Label', {'-100 dB', '-110 dB', '-120 dB'});
 % ylabel('Femto demand');
 % xlabel('Pathloss threshold');
 % print(f,'-depsc', sprintf('%s/femto-demand-compare/rb-ua-femto-demand%s.eps', output_dir, figure_file_name));
@@ -61,7 +61,7 @@ h2 = histcounts(cum_femto_demand(2,:),edges)./(nb_iterations);
 h3 = histcounts(cum_femto_demand(3,:),edges)./(nb_iterations);
 
 bar(edges(1:end-1),[h1; h2; h3]');
-legend('100 dB', '110 dB', '120 dB');
+legend('-100 dB', '-110 dB', '-120 dB');
 
 ylabel('Number of femto BS');
 xlabel('Number of RBs per femto BS');

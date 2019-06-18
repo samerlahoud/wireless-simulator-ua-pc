@@ -180,7 +180,7 @@ title('');
 ylabel('CDF');
 xlabel('Rate (Mbit/s)');
 set(gca,'XScale','log');
-legend({'BR-SA + BR-UA (120 dB)', 'BR-SA + BR-UA (110 dB)', 'BR-SA + BR-UA (100 dB)'}, 'Location', 'NorthWest');
+legend({'BR-SA + BR-UA (-120 dB)', 'BR-SA + BR-UA (-110 dB)', 'BR-SA + BR-UA (-100 dB)'}, 'Location', 'NorthWest');
 hold off;
 print(f,'-depsc', sprintf('%s/reuse-pathloss-compare/rb-ua-cdf-rate%s.eps', output_dir, figure_file_name));
 savefig(sprintf('%s/reuse-pathloss-compare/rb-ua-cdf-rate%s.fig', output_dir, figure_file_name));
