@@ -12,7 +12,7 @@ cum_m1_ua_nb_rounds=[];
 
 for i = 1:nb_iterations
     load(sprintf('%s/rb-ua-100users-uniform-0.15-110dB-rounds-computation/rb-ua-allocation-%dusers-%drun.mat', output_dir, nb_users, i));
-    cum_m1_nb_rounds=[cum_m1_nb_rounds; m1_nb_rounds]
+    cum_m1_nb_rounds=[cum_m1_nb_rounds; m1_nb_rounds];
     cum_m1_ua_nb_rounds=[cum_m1_ua_nb_rounds; m1_ua_nb_rounds];  
 end
 
@@ -24,7 +24,7 @@ boxplot([cum_m1_nb_rounds, cum_m1_ua_nb_rounds],...
     'notch', 'off', ...
     'Label', {'BR-SA', 'BR-UA'});
 ylabel('Number of rounds');
-set(gca,'XTickLabelRotation',90);
+set(gca,'XTickLabelRotation',45);
 ax = gca;
 ax.YGrid = 'on';
 print(f,'-depsc', sprintf('%s/convergence/rb-ua-boxplot-rounds%s.eps', output_dir, figure_file_name));

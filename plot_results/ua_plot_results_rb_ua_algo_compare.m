@@ -121,7 +121,7 @@ f=figure;
 boxplot([cum_m1_rate, cum_m2_rate, cum_m3_rate, cum_m4_rate(cum_m4_rate>0), cum_m5_rate(cum_m5_rate>0), cum_m6_rate(cum_m6_rate>0)]./1e6,...
         'Label', {'BR-SA + BR-UA', 'BR-SA + Cent-UA', 'CoCh-SA + PR-UA', 'SepCh-SA + SCFirst-UA', 'CoCh-SA + Pow-UA', 'BR-SA + Pow-UA'}, ...
         'Whisker',100);
-set(gca,'XTickLabelRotation',90);
+set(gca,'XTickLabelRotation',45);
 ax = gca;
 ax.YGrid = 'on';
 ylabel('Rate (Mbit/s)');
@@ -151,10 +151,18 @@ errY = [std(cum_m1_macro_traffic),std(cum_m1_femto_traffic),std(cum_m1_mmwave_tr
 
 h = bar(y,'stacked');
 
+hatchfill2(h(1),'single','HatchAngle',0,'HatchDensity',30,'HatchLineWidth',0.5); 
+hatchfill2(h(2),'single','HatchAngle',135,'HatchDensity',30,'HatchLineWidth',0.5); 
+hatchfill2(h(3),'single','HatchAngle',45,'HatchDensity',30,'HatchLineWidth',0.5); 
+[~,legend_h,~,~] = legendflex(h,{'Macro','Femto','mmWave'}); 
+hatchfill2(legend_h(length(h)+1),'single','HatchAngle',0,'HatchDensity',10,'HatchColor','k','HatchLineWidth',0.5); 
+hatchfill2(legend_h(length(h)+2),'single','HatchAngle',135,'HatchDensity',10,'HatchColor','k','HatchLineWidth',0.5); 
+hatchfill2(legend_h(length(h)+3),'single','HatchAngle',45,'HatchDensity',10,'HatchColor','k','HatchLineWidth',0.5);
+
 set(gca,'XTickLabel',{'BR-SA + BR-UA', 'BR-SA + Cent-UA', 'CoCh-SA + PR-UA', 'SepCh-SA + SCFirst-UA', 'CoCh-SA + Pow-UA', 'BR-SA + Pow-UA'})
-legend('Macro','Femto','mmWave')
+%legend('Macro','Femto','mmWave')
 ylabel('Percentage of users')
-set(gca,'XTickLabelRotation',90);
+set(gca,'XTickLabelRotation',45);
 ylim([0 110])
 ax = gca;
 ax.YGrid = 'on';
@@ -189,7 +197,7 @@ f=figure;
 boxplot([cum_m1_obj, cum_m2_obj, cum_m3_obj, cum_m4_obj, cum_m5_obj, cum_m6_obj],...
     'notch', 'off', 'Label', {'BR-SA + BR-UA', 'BR-SA + Cent-UA', 'CoCh-SA + PR-UA', 'SepCh-SA + SCFirst-UA', 'CoCh-SA + Pow-UA', 'BR-SA + Pow-UA'});
 ylabel('Objective');
-set(gca,'XTickLabelRotation',90);
+set(gca,'XTickLabelRotation',45);
 ax = gca;
 ax.YGrid = 'on';
 print(f,'-depsc', sprintf('%s/rb-ua-boxplot-objective%s.eps', output_dir, figure_file_name));

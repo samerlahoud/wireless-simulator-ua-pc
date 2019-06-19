@@ -38,8 +38,17 @@ h1 = histcounts(cum_femto_size(1,:),edges)./(nb_iterations);
 h2 = histcounts(cum_femto_size(2,:),edges)./(nb_iterations);
 h3 = histcounts(cum_femto_size(3,:),edges)./(nb_iterations);
 
-bar(edges(1:end-1),[h1; h2; h3]');
-legend('-80 dB', '-110 dB', '-120 dB');
+b=bar(edges(1:end-1),[h1; h2; h3]');
+%legend('-80 dB', '-110 dB', '-120 dB');
+
+hatchfill2(b(1),'single','HatchAngle',0,'HatchDensity',30,'HatchLineWidth',0.5); 
+hatchfill2(b(2),'single','HatchAngle',135,'HatchDensity',30,'HatchLineWidth',0.5); 
+hatchfill2(b(3),'single','HatchAngle',45,'HatchDensity',30,'HatchLineWidth',0.5); 
+[~,legend_h,~,~] = legendflex(b,{'-80 dB', '-110 dB', '-120 dB'}); 
+hatchfill2(legend_h(length(b)+1),'single','HatchAngle',0,'HatchDensity',10,'HatchColor','k','HatchLineWidth',0.5); 
+hatchfill2(legend_h(length(b)+2),'single','HatchAngle',135,'HatchDensity',10,'HatchColor','k','HatchLineWidth',0.5); 
+hatchfill2(legend_h(length(b)+3),'single','HatchAngle',45,'HatchDensity',10,'HatchColor','k','HatchLineWidth',0.5);
+
 
 %boxplot(cum_femto_size','notch', 'off', 'Label', {'80 dB', '110 dB', '120 dB'});
 ylabel('Average number of clusters');
@@ -55,16 +64,24 @@ savefig(sprintf('%s/femto-demand-compare/rb-ua-femto-size%s.fig', output_dir, fi
 % savefig(sprintf('%s/femto-demand-compare/rb-ua-femto-demand%s.fig', output_dir, figure_file_name));
 
 f=figure;
-edges = 0:1:25;
+edges = 0:3:25;
 h1 = histcounts(cum_femto_demand(1,:),edges)./(nb_iterations);
 h2 = histcounts(cum_femto_demand(2,:),edges)./(nb_iterations);
 h3 = histcounts(cum_femto_demand(3,:),edges)./(nb_iterations);
 
-bar(edges(1:end-1),[h1; h2; h3]');
-legend('-80 dB', '-110 dB', '-120 dB');
+b=bar(edges(1:end-1),[h1; h2; h3]');
+%legend('-80 dB', '-110 dB', '-120 dB');
+hatchfill2(b(1),'single','HatchAngle',0,'HatchDensity',30,'HatchLineWidth',0.5); 
+hatchfill2(b(2),'single','HatchAngle',135,'HatchDensity',30,'HatchLineWidth',0.5); 
+hatchfill2(b(3),'single','HatchAngle',45,'HatchDensity',30,'HatchLineWidth',0.5); 
+[~,legend_h,~,~] = legendflex(b,{'-80 dB', '-110 dB', '-120 dB'}); 
+hatchfill2(legend_h(length(b)+1),'single','HatchAngle',0,'HatchDensity',10,'HatchColor','k','HatchLineWidth',0.5); 
+hatchfill2(legend_h(length(b)+2),'single','HatchAngle',135,'HatchDensity',10,'HatchColor','k','HatchLineWidth',0.5); 
+hatchfill2(legend_h(length(b)+3),'single','HatchAngle',45,'HatchDensity',10,'HatchColor','k','HatchLineWidth',0.5);
 
 ylabel('Number of femto BS');
 xlabel('Number of RBs per femto BS');
+ylim([0 25])
 print(f,'-depsc', sprintf('%s/femto-demand-compare/rb-ua-femto-demand%s.eps', output_dir, figure_file_name));
 savefig(sprintf('%s/femto-demand-compare/rb-ua-femto-demand%s.fig', output_dir, figure_file_name));
 

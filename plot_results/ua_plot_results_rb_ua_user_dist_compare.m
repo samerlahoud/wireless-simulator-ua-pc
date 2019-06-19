@@ -240,14 +240,23 @@ y = [mean(cum_m11_macro_traffic),mean(cum_m11_femto_traffic),mean(cum_m11_mmwave
 
 h = bar(y,'stacked');
 
+hatchfill2(h(1),'single','HatchAngle',0,'HatchDensity',30,'HatchLineWidth',0.5); 
+hatchfill2(h(2),'single','HatchAngle',135,'HatchDensity',30,'HatchLineWidth',0.5); 
+hatchfill2(h(3),'single','HatchAngle',45,'HatchDensity',30,'HatchLineWidth',0.5); 
+[~,legend_h,~,~] = legendflex(h,{'Macro','Femto','mmWave'}); 
+hatchfill2(legend_h(length(h)+1),'single','HatchAngle',0,'HatchDensity',10,'HatchColor','k','HatchLineWidth',0.5); 
+hatchfill2(legend_h(length(h)+2),'single','HatchAngle',135,'HatchDensity',10,'HatchColor','k','HatchLineWidth',0.5); 
+hatchfill2(legend_h(length(h)+3),'single','HatchAngle',45,'HatchDensity',10,'HatchColor','k','HatchLineWidth',0.5);
+
+
 set(gca,'XTickLabel',{'BR-SA + BR-UA (Clust)', 'BR-SA + BR-UA (Unif)',  ...
     '', ...
     'CoCh-SA + PR-UA (Clust)', 'CoCh-SA + PR-UA (Unif)', ...
     '', ...
     'CoCh-SA + Pow-UA (Clust)', 'CoCh-SA + Pow-UA (Unif)'})
-legend('Macro','Femto','mmWave','Location', 'NorthWest')
+%legend('Macro','Femto','mmWave','Location', 'NorthWest')
 ylabel('Percentage of users')
-set(gca,'XTickLabelRotation',90);
+set(gca,'XTickLabelRotation',45);
 ylim([0 110])
 ax = gca;
 ax.YGrid = 'on';
@@ -260,7 +269,7 @@ boxplot([cum_m11_obj, cum_m12_obj, cum_m31_obj, cum_m32_obj, cum_m51_obj, cum_m5
     'Label', {'BR-SA + BR-UA (Clust)', 'BR-SA + BR-UA (Unif)', 'CoCh-SA + PR-UA (Clust)', 'CoCh-SA + PR-UA (Unif)','CoCh-SA + Pow-UA (Clust)', 'CoCh-SA + Pow-UA (Unif)'}, ...
     'Positions', [1,2,4,5,7,8]);
 ylabel('Objective');
-set(gca,'XTickLabelRotation',90);
+set(gca,'XTickLabelRotation',45);
 ax = gca;
 ax.YGrid = 'on';
 print(f,'-depsc', sprintf('%s/user-density-compare/rb-ua-boxplot-objective%s.eps', output_dir, figure_file_name));
@@ -273,7 +282,7 @@ boxplot([cum_m11_rate, cum_m12_rate, ...
     'Whisker',100, 'Label', ...
     {'BR-SA + BR-UA (Clust)', 'BR-SA + BR-UA (Unif)', 'CoCh-SA + PR-UA (Clust)', 'CoCh-SA + PR-UA (Unif)','CoCh-SA + Pow-UA (Clust)', 'CoCh-SA + Pow-UA (Unif)'}, ...
     'Positions', [1,2,4,5,7,8]);
-set(gca,'XTickLabelRotation',90);
+set(gca,'XTickLabelRotation',45);
 ax = gca;
 ax.YGrid = 'on';
 ylabel('Rate (Mbit/s)');
