@@ -6,7 +6,7 @@ netconfig.gradient_convergence_eps = 1e-3; % 1e-3 for centralized 1e-6 for distr
 
 netconfig.nb_iterations = 20;
 netconfig.nb_users = 100;
-netconfig.nb_RBs = 100;
+netconfig.nb_RBs = 50;
 %netconfig.nb_femto_RBs = 50;
 
 netconfig.RB_bandwidth = 180e3;         % Frequency in Hz
