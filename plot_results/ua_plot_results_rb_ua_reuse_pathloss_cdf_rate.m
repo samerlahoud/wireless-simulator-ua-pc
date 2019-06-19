@@ -145,8 +145,8 @@ for i = 1:nb_iterations
 end
 
 for i = 1:nb_iterations
-    load(sprintf('%s/rb-ua-100users-uniform-0.15-100dB/radio-conditions-%dusers-%drun.mat', output_dir, nb_users, i));
-    load(sprintf('%s/rb-ua-100users-uniform-0.15-100dB/rb-ua-allocation-%dusers-%drun.mat', output_dir, nb_users, i));
+    load(sprintf('%s/rb-ua-100users-uniform-0.15-80dB/radio-conditions-%dusers-%drun.mat', output_dir, nb_users, i));
+    load(sprintf('%s/rb-ua-100users-uniform-0.15-80dB/rb-ua-allocation-%dusers-%drun.mat', output_dir, nb_users, i));
     
     nb_BSs = netconfig.nb_BSs;
     nb_macro_BSs = netconfig.nb_macro_BSs;
@@ -169,18 +169,18 @@ for i = 1:nb_iterations
 end
 
 f=figure; 
-h=cdfplot(cum_m11_rate/1e6);
+h=cdfplot(cum_m13_rate/1e6);
 set(h,'LineWidth',2,'LineStyle', '--')
 hold on;
 h=cdfplot(cum_m12_rate/1e6);
 set(h,'LineWidth',2,'LineStyle', '-')
-h=cdfplot(cum_m13_rate/1e6);
+h=cdfplot(cum_m11_rate/1e6);
 set(h,'LineWidth',2,'LineStyle', ':')
 title('');
 ylabel('CDF');
 xlabel('Rate (Mbit/s)');
 set(gca,'XScale','log');
-legend({'BR-SA + BR-UA (-120 dB)', 'BR-SA + BR-UA (-110 dB)', 'BR-SA + BR-UA (-100 dB)'}, 'Location', 'NorthWest');
+legend({'BR-SA + BR-UA (-80 dB)', 'BR-SA + BR-UA (-110 dB)', 'BR-SA + BR-UA (-120 dB)'}, 'Location', 'NorthWest');
 hold off;
 print(f,'-depsc', sprintf('%s/reuse-pathloss-compare/rb-ua-cdf-rate%s.eps', output_dir, figure_file_name));
 savefig(sprintf('%s/reuse-pathloss-compare/rb-ua-cdf-rate%s.fig', output_dir, figure_file_name));
