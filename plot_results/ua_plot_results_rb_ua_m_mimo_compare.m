@@ -191,10 +191,18 @@ y = [mean(cum_m11_macro_traffic),mean(cum_m11_femto_traffic),mean(cum_m11_mmwave
 
 h = bar(y,'stacked');
 
+hatchfill2(h(1),'single','HatchAngle',0,'HatchDensity',30,'HatchLineWidth',0.5); 
+hatchfill2(h(2),'single','HatchAngle',135,'HatchDensity',30,'HatchLineWidth',0.5); 
+hatchfill2(h(3),'single','HatchAngle',45,'HatchDensity',30,'HatchLineWidth',0.5); 
+[~,legend_h,~,~] = legendflex(h,{'Macro','Femto','mmWave'}); 
+hatchfill2(legend_h(length(h)+1),'single','HatchAngle',0,'HatchDensity',10,'HatchColor','k','HatchLineWidth',0.5); 
+hatchfill2(legend_h(length(h)+2),'single','HatchAngle',135,'HatchDensity',10,'HatchColor','k','HatchLineWidth',0.5); 
+hatchfill2(legend_h(length(h)+3),'single','HatchAngle',45,'HatchDensity',10,'HatchColor','k','HatchLineWidth',0.5);
+
 set(gca,'XTickLabel',{'BR-SA + Cent-UA', 'BR-SA + Cent-UA (mMIMO)'})
-legend('Macro','Femto','mmWave','Location', 'NorthWest')
+%legend('Macro','Femto','mmWave','Location', 'NorthWest')
 ylabel('Percentage of users')
-set(gca,'XTickLabelRotation',90);
+set(gca,'XTickLabelRotation',45);
 ylim([0 110])
 ax = gca;
 ax.YGrid = 'on';
@@ -206,7 +214,7 @@ boxplot([cum_m11_obj, cum_m12_obj],...
     'notch', 'off', 'Label', ...
     {'BR-SA + Cent-UA', 'BR-SA + Cent-UA (mMIMO)'});
 ylabel('Objective');
-set(gca,'XTickLabelRotation',90);
+set(gca,'XTickLabelRotation',45);
 ax = gca;
 ax.YGrid = 'on';
 print(f,'-depsc', sprintf('%s/m-mimo-compare/rb-ua-boxplot-objective%s.eps', output_dir, figure_file_name));
@@ -216,7 +224,7 @@ f=figure;
 boxplot([cum_m11_rate, cum_m12_rate]./1e6,...
     'Whisker',100, 'Label', ...
     {'BR-SA + Cent-UA', 'BR-SA + Cent-UA (mMIMO)'});
-set(gca,'XTickLabelRotation',90);
+set(gca,'XTickLabelRotation',45);
 ax = gca;
 ax.YGrid = 'on';
 ylabel('Rate (Mbit/s)');
