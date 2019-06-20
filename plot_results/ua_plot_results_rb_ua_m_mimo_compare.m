@@ -154,8 +154,8 @@ for i = 1:nb_iterations
 end
 
 for i = 1:nb_iterations
-    load(sprintf('%s/rb-ua-100users-uniform-0.15-m-mimo-110dB/radio-conditions-%dusers-%drun.mat', output_dir, nb_users, i));
-    load(sprintf('%s/rb-ua-100users-uniform-0.15-m-mimo-110dB/rb-ua-allocation-%dusers-%drun.mat', output_dir, nb_users, i));
+    load(sprintf('%s/rb-ua-100users-uniform-0.15-m-mimo-psi-045-110dB/radio-conditions-%dusers-%drun.mat', output_dir, nb_users, i));
+    load(sprintf('%s/rb-ua-100users-uniform-0.15-m-mimo-psi-045-110dB/rb-ua-allocation-%dusers-%drun.mat', output_dir, nb_users, i));
     
     nb_BSs = netconfig.nb_BSs;
     nb_macro_BSs = netconfig.nb_macro_BSs;
@@ -170,13 +170,31 @@ for i = 1:nb_iterations
     %cum_m12_jain_index = [cum_m12_jain_index; m12_jain_index];
 end
 
+for i = 1:nb_iterations
+    load(sprintf('%s/rb-ua-100users-uniform-0.15-m-mimo-psi-1-110dB/radio-conditions-%dusers-%drun.mat', output_dir, nb_users, i));
+    load(sprintf('%s/rb-ua-100users-uniform-0.15-m-mimo-psi-1-110dB/rb-ua-allocation-%dusers-%drun.mat', output_dir, nb_users, i));
+    
+    nb_BSs = netconfig.nb_BSs;
+    nb_macro_BSs = netconfig.nb_macro_BSs;
+    nb_macro_femto_BSs = netconfig.nb_macro_femto_BSs;
+    
+    cum_m13_rate = [cum_m13_rate; m1_rate];
+    cum_m13_obj = [cum_m13_obj; m1_obj];
+    cum_m13_ua = [cum_m13_ua; m1_ua];
+    cum_m13_macro_traffic = [cum_m13_macro_traffic; sum(sum(m1_ua(:,1:nb_macro_BSs)))];
+    cum_m13_femto_traffic = [cum_m13_femto_traffic; sum(sum(m1_ua(:,nb_macro_BSs+1:nb_macro_femto_BSs)))];
+    cum_m13_mmwave_traffic = [cum_m13_mmwave_traffic; sum(sum(m1_ua(:,nb_macro_femto_BSs+1:nb_BSs)))];
+    %cum_m13_jain_index = [cum_m13_jain_index; m13_jain_index];
+end
+
 % Plot results
 figure_file_name = sprintf('-%dusers',nb_users);
 
 f=figure;
 
 y = [mean(cum_m11_macro_traffic),mean(cum_m11_femto_traffic),mean(cum_m11_mmwave_traffic); ...
-    mean(cum_m12_macro_traffic),mean(cum_m12_femto_traffic),mean(cum_m12_mmwave_traffic);] ...
+    mean(cum_m12_macro_traffic),mean(cum_m12_femto_traffic),mean(cum_m12_mmwave_traffic); ...
+    mean(cum_m13_macro_traffic),mean(cum_m13_femto_traffic),mean(cum_m13_mmwave_traffic);] ...
     *(100./nb_users);
 
 % errY = [std(cum_m11_macro_traffic),std(cum_m11_femto_traffic),std(cum_m11_mmwave_traffic); ...
@@ -199,7 +217,7 @@ hatchfill2(legend_h(length(h)+1),'single','HatchAngle',0,'HatchDensity',10,'Hatc
 hatchfill2(legend_h(length(h)+2),'single','HatchAngle',135,'HatchDensity',10,'HatchColor','k','HatchLineWidth',0.5); 
 hatchfill2(legend_h(length(h)+3),'single','HatchAngle',45,'HatchDensity',10,'HatchColor','k','HatchLineWidth',0.5);
 
-set(gca,'XTickLabel',{'BR-SA + Cent-UA', 'BR-SA + Cent-UA (mMIMO)'})
+set(gca,'XTickLabel',{'BR-SA + Cent-UA', 'BR-SA + Cent-UA (mMIMO,0.45)', 'BR-SA + Cent-UA (mMIMO,1)'})
 %legend('Macro','Femto','mmWave','Location', 'NorthWest')
 ylabel('Percentage of users')
 set(gca,'XTickLabelRotation',45);
@@ -210,9 +228,9 @@ print(f,'-depsc', sprintf('%s/m-mimo-compare/rb-ua-traffic-perc%s.eps', output_d
 savefig(sprintf('%s/m-mimo-compare/rb-ua-traffic-perc%s.fig', output_dir, figure_file_name));
  
 f=figure;
-boxplot([cum_m11_obj, cum_m12_obj],...
+boxplot([cum_m11_obj, cum_m12_obj, cum_m13_obj],...
     'notch', 'off', 'Label', ...
-    {'BR-SA + Cent-UA', 'BR-SA + Cent-UA (mMIMO)'});
+    {'BR-SA + Cent-UA', 'BR-SA + Cent-UA (mMIMO,0.45)', 'BR-SA + Cent-UA (mMIMO,1)'});
 ylabel('Objective');
 set(gca,'XTickLabelRotation',45);
 ax = gca;
@@ -221,9 +239,9 @@ print(f,'-depsc', sprintf('%s/m-mimo-compare/rb-ua-boxplot-objective%s.eps', out
 savefig(sprintf('%s/m-mimo-compare/rb-ua-boxplot-objective%s.fig', output_dir, figure_file_name));
 
 f=figure;
-boxplot([cum_m11_rate, cum_m12_rate]./1e6,...
+boxplot([cum_m11_rate, cum_m12_rate, cum_m13_rate]./1e6,...
     'Whisker',100, 'Label', ...
-    {'BR-SA + Cent-UA', 'BR-SA + Cent-UA (mMIMO)'});
+    {'BR-SA + Cent-UA', 'BR-SA + Cent-UA (mMIMO,0.45)', 'BR-SA + Cent-UA (mMIMO,1)'});
 set(gca,'XTickLabelRotation',45);
 ax = gca;
 ax.YGrid = 'on';
