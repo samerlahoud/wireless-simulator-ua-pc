@@ -11,6 +11,7 @@ global_convergence_eps = 1e-4;
 
 user_association = 0.01.*ones(nb_users,nb_BSs);
 nb_rounds = 0;
+cumulative_nb_steps = zeros(1,nb_users);
 
 while(1)
     previous_user_association = user_association;
@@ -64,6 +65,7 @@ while(1)
             %user_association_convergence = sum(abs(user_association(u,:) - previous_per_user_association))
             if(user_association_convergence < gradient_convergence_eps)
                 %disp('convergence');
+                cumulative_nb_steps(nb_rounds+1,u) = s;
                 break;
             end
             %cumulative_user_association = [cumulative_user_association;user_association];
@@ -84,5 +86,6 @@ while(1)
         break
     end
 end
+%save('cumulative_nb_steps');
 end
 

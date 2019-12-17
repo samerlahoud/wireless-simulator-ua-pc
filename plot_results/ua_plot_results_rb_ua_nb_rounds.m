@@ -23,7 +23,7 @@ f=figure;
 boxplot([cum_m1_nb_rounds, cum_m1_ua_nb_rounds],...
     'notch', 'off', ...
     'Label', {'BR-SA', 'BR-UA'});
-ylabel('Number of rounds');
+ylabel('Number of iterations');
 set(gca,'XTickLabelRotation',45);
 ax = gca;
 ax.YGrid = 'on';
