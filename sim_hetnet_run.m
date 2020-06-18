@@ -34,7 +34,7 @@ reuse_min_pathloss = netconfig.reuse_min_pathloss;
 
 % Compare RB allocation with Pow-UA
 for i = 1:nb_iterations
-    [BS_abs, BS_ord, user_abs, user_ord, pathloss, BS_to_BS_pathloss, rx_power]=enerate_hetnet_radio_conditions_femto_mmwave_variable;
+    [BS_abs, BS_ord, user_abs, user_ord, pathloss, BS_to_BS_pathloss, rx_power]=generate_hetnet_radio_conditions_femto_mmwave_variable;
     [femto_demand] = ua_demand_computation(rx_power, BS_to_BS_pathloss, reuse_min_pathloss);
     algo_compare_rb_allocation(rx_power, BS_to_BS_pathloss, femto_demand, i);
     result_file_name = sprintf('./output/user-association-output/radio-conditions-%dusers-%drun.mat', nb_users, i);
